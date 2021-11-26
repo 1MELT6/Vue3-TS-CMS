@@ -10,3 +10,6 @@ To github.com:1MELT6/Vue3-TS-CMS.git
 3、husky保证提交前格式化代码
 4、提交信息规范：commitizen
 5、提交限制/代码提交验证 commitlint
+
+
+  1、想要修改vuecli的webpack配置、可以通过vue.config.js
