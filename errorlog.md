@@ -9,3 +9,4 @@ To github.com:1MELT6/Vue3-TS-CMS.git
 2、prettier和eslint格式统一
 3、husky保证提交前格式化代码
 4、提交信息规范：commitizen
+5、提交限制/代码提交验证 commitlint
