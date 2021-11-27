@@ -3,6 +3,7 @@ import App from './App.vue'
 // 全局注册
 // import ElementPlus from 'element-plus'
 // import 'element-plus/dist/index.css'
+
 // 局部注册
 // import 'element-plus/theme-chalk/base.css'
 // import { ElButton, ElForm, ElAlert, ElBacktop } from 'element-plus'
