@@ -1,0 +1,15 @@
+# https://editorconfig.org
+# 用来对格式进行限制防止不同人不同设备带来的编写格式不同
+root = true
+
+[*]
+charset = utf-8
+indent_style = space
+indent_size = 2
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.md]
+insert_final_newline = false
+trim_trailing_whitespace = false
