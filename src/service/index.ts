@@ -8,6 +8,11 @@ const hyRequest = new HYRequest({
   // hooks:{拦截器}
   interceptors: {
     requestInterceptor: (config) => {
+      // 携带token的拦截
+      const token = ''
+      if (token) {
+        config.headers!.Authorization = `Bearer ${token}`
+      }
       console.log('请求成功的拦截')
       return config
     },

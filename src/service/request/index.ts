@@ -39,10 +39,20 @@ class HYRequest {
     this.instance.interceptors.response.use(
       (res) => {
         console.log('所有的实例都有的拦截器: 响应成功拦截')
-        return res
+
+        const data = res.data
+        if (data.returnCode === '-1001') {
+          console.log('請求失敗~錯誤信息')
+        } else {
+          return res.data
+        }
       },
       (err) => {
         console.log('所有的实例都有的拦截器: 响应失败拦截')
+        if (err.response.status === 404) {
+          console.log('404错误')
+        }
+
         return err
       }
     )
