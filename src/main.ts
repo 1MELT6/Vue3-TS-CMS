@@ -2,7 +2,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import { globalRegister } from './global'
-import './service/axios.demo'
+// import './service/axios.demo'
 import hyRequest from './service'
 import router from './router'
 import store from './store'
@@ -18,7 +18,10 @@ console.log(process.env.VUE_APP_BASE_URL)
 console.log(process.env.VUE_APP_BASE_NAME)
 
 // hyRequest.get()
-// hyRequest.request()
+hyRequest.request({
+  url: '/home/multidata',
+  method: 'GET'
+})
 
 // --------------全局注册elementplus-------------------
 // import { createApp } from 'vue'

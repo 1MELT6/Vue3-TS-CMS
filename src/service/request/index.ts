@@ -8,6 +8,11 @@ class HYRequest {
     this.instance = axios.create(config)
   }
 
+  request(config: AxiosRequestConfig): void {
+    this.instance.request(config).then((res) => {
+      console.log(res)
+    })
+  }
   // request() {}
   // get() {}
 }
