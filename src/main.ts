@@ -38,7 +38,8 @@ console.log(process.env.VUE_APP_BASE_NAME)
 // 没有单独拦截处理
 hyRequest.request({
   url: '/home/multidata',
-  method: 'GET'
+  method: 'GET',
+  showLoading: false
 })
 
 // --------------全局注册elementplus-------------------

@@ -3,6 +3,9 @@ import type { AxiosInstance, AxiosRequestConfig } from 'axios'
 import type { HYRequestInterceptors, HYRequestConfig } from './type'
 import { ElLoading } from 'element-plus'
 import { ILoadingInstance } from 'element-plus/lib/el-loading/src/loading.type'
+
+const DEFAULT_LOADING = true
+
 class HYRequest {
   // instance: any
   instance: AxiosInstance
@@ -16,7 +19,7 @@ class HYRequest {
   constructor(config: HYRequestConfig) {
     this.instance = axios.create(config)
     // 前方是null/undefined执行后面
-    this.showLoading = config.showLoading ?? true
+    this.showLoading = config.showLoading ?? DEFAULT_LOADING
     // 扩展的属性
     this.interceptors = config.interceptors
     // 1、创建完requestInterceptors放到实例里面
@@ -93,12 +96,26 @@ class HYRequest {
     if (config.interceptors?.requestInterceptor) {
       config = config.interceptors.requestInterceptor(config)
     }
-    this.instance.request(config).then((res) => {
-      if (config.interceptors?.responseInterceptor) {
-        res = config.interceptors.responseInterceptor(res)
-      }
-      console.log(res)
-    })
+    // 判断main.ts里的showloading是否为false,但是这样下面也默认没有loading
+    if (config.showLoading === false) {
+      this.showLoading = config.showLoading
+    }
+    this.instance
+      .request(config)
+      .then((res) => {
+        if (config.interceptors?.responseInterceptor) {
+          res = config.interceptors.responseInterceptor(res)
+        }
+        console.log(res)
+
+        // 在96所以重新设置,这样不会影响下一个请求
+        this.showLoading = DEFAULT_LOADING
+      })
+      .catch((err) => {
+        // 在96所以重新设置,这样不会影响下一个请求
+        this.showLoading = DEFAULT_LOADING
+        return err
+      })
   }
   // }
   // request() {}
