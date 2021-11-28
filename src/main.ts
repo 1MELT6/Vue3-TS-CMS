@@ -20,8 +20,25 @@ console.log(process.env.VUE_APP_BASE_NAME)
 // hyRequest.get()
 hyRequest.request({
   url: '/home/multidata',
-  method: 'GET'
+  method: 'GET',
+  // 处理数据
+  interceptors: {
+    requestInterceptor: (config) => {
+      console.log('单独请求的config')
+      return config
+      // 一般不拦截error
+    },
+    responseInterceptor: (res) => {
+      console.log('单独响应的response')
+      return res
+    }
+  }
 })
+// 没有单独拦截处理
+// hyRequest.request({
+//   url: '/home/multidata',
+//   method: 'GET'
+// })
 
 // --------------全局注册elementplus-------------------
 // import { createApp } from 'vue'
