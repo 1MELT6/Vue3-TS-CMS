@@ -4,7 +4,26 @@ import { BASE_URL, TIME_OUT } from './request/config'
 // export default hyRequest = {}
 const hyRequest = new HYRequest({
   baseURL: BASE_URL,
-  timeout: TIME_OUT
+  timeout: TIME_OUT,
+  // hooks:{拦截器}
+  interceptors: {
+    requestInterceptor: (config) => {
+      console.log('请求成功的拦截')
+      return config
+    },
+    requestInterceptorCatch: (err) => {
+      console.log('请求失败的拦截')
+      return err
+    },
+    responseInterceptor: (res) => {
+      console.log('回应成功的拦截')
+      return res
+    },
+    responseInterceptorCatch: (err) => {
+      console.log('回应失败的拦截')
+      return err
+    }
+  }
 })
 
 // 多个base地址不同：就是多个实例对象的创建
