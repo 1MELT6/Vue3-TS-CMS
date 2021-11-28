@@ -11,4 +11,6 @@ export interface HYRequestConfig extends AxiosRequestConfig {
   // 在AxiosRequestConfig基础上进行扩展
   // 有interceptors属性，并且类型为HYRequestInterceptors
   interceptors?: HYRequestInterceptors
+  // 在不同实例上可以设定是否有loading
+  showLoading?: boolean
 }
