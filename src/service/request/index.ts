@@ -106,15 +106,19 @@ class HYRequest {
         this.showLoading = config.showLoading
       }
       this.instance
-        .request(config)
+        .request<any, T>(config)
         .then((res) => {
+          // 1、单个请求对数据的处理
           if (config.interceptors?.responseInterceptor) {
             res = config.interceptors.responseInterceptor(res)
           }
           console.log(res)
-
+          // 2、判断是否显示loading
           // 在96所以重新设置,这样不会影响下一个请求
           this.showLoading = DEFAULT_LOADING
+
+          // 3、将结果resolve返回出去（调用result的时候会调用外面的then）
+          resolve(res)
         })
         .catch((err) => {
           // 在96所以重新设置,这样不会影响下一个请求
