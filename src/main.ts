@@ -36,11 +36,24 @@ console.log(process.env.VUE_APP_BASE_NAME)
 //   }
 // })
 // 没有单独拦截处理
-hyRequest.request({
-  url: '/home/multidata',
-  method: 'GET',
-  showLoading: false
-})
+
+interface DataType {
+  data: any
+  returnCode: string
+  success: boolean
+}
+
+hyRequest
+  .request<DataType>({
+    url: '/home/multidata',
+    method: 'GET',
+    showLoading: false
+  })
+  .then((res) => {
+    console.log(res.data)
+    console.log(res.returnCode)
+    console.log(res.success)
+  })
 
 // --------------全局注册elementplus-------------------
 // import { createApp } from 'vue'

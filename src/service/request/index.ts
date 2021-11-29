@@ -92,30 +92,36 @@ class HYRequest {
   //     console.log(res)
   //   })
   // }
-  request(config: HYRequestConfig): void {
-    if (config.interceptors?.requestInterceptor) {
-      config = config.interceptors.requestInterceptor(config)
-    }
-    // 判断main.ts里的showloading是否为false,但是这样下面也默认没有loading
-    if (config.showLoading === false) {
-      this.showLoading = config.showLoading
-    }
-    this.instance
-      .request(config)
-      .then((res) => {
-        if (config.interceptors?.responseInterceptor) {
-          res = config.interceptors.responseInterceptor(res)
-        }
-        console.log(res)
+  request<T>(config: HYRequestConfig): Promise<T> {
+    //  由于不能在main拿到结果处理所以需要返回一个promise,所以类型不再是void而是promise
+    //添加了类型<T>之后就可以在main设定interface
+    return new Promise((resolve, reject) => {
+      // 1、单个请求对请求config的处理
+      if (config.interceptors?.requestInterceptor) {
+        config = config.interceptors.requestInterceptor(config)
+      }
+      // 2、判断是否显示loading
+      // 判断main.ts里的showloading是否为false,但是这样下面也默认没有loading
+      if (config.showLoading === false) {
+        this.showLoading = config.showLoading
+      }
+      this.instance
+        .request(config)
+        .then((res) => {
+          if (config.interceptors?.responseInterceptor) {
+            res = config.interceptors.responseInterceptor(res)
+          }
+          console.log(res)
 
-        // 在96所以重新设置,这样不会影响下一个请求
-        this.showLoading = DEFAULT_LOADING
-      })
-      .catch((err) => {
-        // 在96所以重新设置,这样不会影响下一个请求
-        this.showLoading = DEFAULT_LOADING
-        return err
-      })
+          // 在96所以重新设置,这样不会影响下一个请求
+          this.showLoading = DEFAULT_LOADING
+        })
+        .catch((err) => {
+          // 在96所以重新设置,这样不会影响下一个请求
+          this.showLoading = DEFAULT_LOADING
+          return err
+        })
+    })
   }
   // }
   // request() {}
