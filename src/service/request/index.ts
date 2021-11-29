@@ -92,7 +92,7 @@ class HYRequest {
   //     console.log(res)
   //   })
   // }
-  request<T>(config: HYRequestConfig): Promise<T> {
+  request<T>(config: HYRequestConfig<T>): Promise<T> {
     //  由于不能在main拿到结果处理所以需要返回一个promise,所以类型不再是void而是promise
     //添加了类型<T>之后就可以在main设定interface
     return new Promise((resolve, reject) => {
