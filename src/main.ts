@@ -2,6 +2,8 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import { globalRegister } from './global'
+import 'normalize.css'
+import './assets/css/index.less'
 // import './service/axios.demo'
 import hyRequest from './service'
 import router from './router'
@@ -17,24 +19,6 @@ app.mount('#app')
 console.log(process.env.VUE_APP_BASE_URL)
 console.log(process.env.VUE_APP_BASE_NAME)
 
-// hyRequest.get()
-// 很少用单独拦截
-// hyRequest.request({
-//   url: '/home/multidata',
-//   method: 'GET',
-//   // 处理数据
-//   interceptors: {
-//     requestInterceptor: (config) => {
-//       console.log('单独请求的config')
-//       return config
-//       // 一般不拦截error
-//     },
-//     responseInterceptor: (res) => {
-//       console.log('单独响应的response')
-//       return res
-//     }
-//   }
-// })
 // 没有单独拦截处理
 
 interface DataType {
@@ -54,6 +38,24 @@ hyRequest
     console.log(res.returnCode)
     console.log(res.success)
   })
+// hyRequest.get()
+// 很少用单独拦截
+// hyRequest.request({
+//   url: '/home/multidata',
+//   method: 'GET',
+//   // 处理数据
+//   interceptors: {
+//     requestInterceptor: (config) => {
+//       console.log('单独请求的config')
+//       return config
+//       // 一般不拦截error
+//     },
+//     responseInterceptor: (res) => {
+//       console.log('单独响应的response')
+//       return res
+//     }
+//   }
+// })
 
 // --------------全局注册elementplus-------------------
 // import { createApp } from 'vue'
