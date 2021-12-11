@@ -5,7 +5,7 @@
       <el-input v-model="account.name" />
     </el-form-item>
     <el-form-item label="密码" prop="password">
-      <el-input v-model="account.password" />
+      <el-input v-model="account.password" show-password />
     </el-form-item>
     <!-- <el-button type="primary" class="loginButton">登录</el-button> -->
   </el-form>
@@ -15,49 +15,27 @@
 import { defineComponent, reactive, ref } from 'vue'
 import { rules } from '../config/account-config'
 import { ElForm } from 'element-plus'
+import localCache from '@/utils/cache'
 export default defineComponent({
-  // props: {
-  //   account: {
-  //     type: Object
-  //   }
-  // },
   setup() {
-    // const rules = {
-    //   name: [
-    //     {
-    //       required: true,
-    //       message: '用户名是必传内容~',
-    //       trigger: 'blur'
-    //     },
-    //     {
-    //       pattern: /^[a-z0-9]{5,10}$/,
-    //       message: '用户名必须是5~10个字母或者数字~',
-    //       trigger: 'blur'
-    //     }
-    //   ],
-    //   password: [
-    //     {
-    //       required: true,
-    //       message: '密码是必传内容~',
-    //       trigger: 'blur'
-    //     },
-    //     {
-    //       pattern: /^[a-z0-9]{3,}$/,
-    //       message: '用户名必须是3位以上的字母或者数字~',
-    //       trigger: 'blur'
-    //     }
-    //   ]
-    // }
     const account = reactive({
       name: '',
       password: ''
     })
-    //  全局引用elform需要另外导入
     const formRef = ref<InstanceType<typeof ElForm>>()
-    // 从handlelogin过来
-    const LoginAction = () => {
+    const LoginAction = (isKeepPassword: boolean) => {
       formRef.value?.validate((valid) => {
-        console.log(valid) //验证失败返回false
+        if (valid) {
+          // 1、判断是否需要记住密码
+          if (isKeepPassword) {
+            //本地缓存
+            localCache.setCache('name', account.name)
+            localCache.setCache('password', account.password)
+          } else {
+            localCache.deleteCache('name')
+            localCache.deleteCache('password')
+          }
+        }
       })
     }
     return { account, rules, LoginAction, formRef }

@@ -41,12 +41,12 @@ export default defineComponent({
   setup() {
     // 默认打勾
     const isKeepPassword = ref(true)
-    //不默认为空可以执行真正登录,但是需要传泛型是loginaccount但是他是个对象
+    //不默认为空可以执行真正登录,但是需要传泛型是loginaccount但是他是个对象，所以通过typeof拿对象再InstanceType拿实例类型
     const accountRef = ref<InstanceType<typeof LoginAccout>>() //默认为空然后返回再进行绑定logonaccount
     // 大的告诉小的执行操作：直接拿组件对象ref
     const handleLoginClick = () => {
       console.log('立即登录', accountRef.value) //目的是执行account组件的（accountRef.value.loginaction）
-      accountRef.value?.LoginAction()
+      accountRef.value?.LoginAction(isKeepPassword.value)
       // 保证loginAction写错是就标红不用编译运行
     }
     return { handleLoginClick, isKeepPassword, accountRef }
