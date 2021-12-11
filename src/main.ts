@@ -27,17 +27,17 @@ interface DataType {
   success: boolean
 }
 
-hyRequest
-  .request<DataType>({
-    url: '/home/multidata',
-    method: 'GET',
-    showLoading: false
-  })
-  .then((res) => {
-    console.log(res.data)
-    console.log(res.returnCode)
-    console.log(res.success)
-  })
+// hyRequest
+//   .request<DataType>({
+//     url: '/home/multidata',
+//     method: 'GET',
+//     showLoading: false
+//   })
+//   .then((res) => {
+//     console.log(res.data)
+//     console.log(res.returnCode)
+//     console.log(res.success)
+//   })
 // hyRequest.get()
 // 很少用单独拦截
 // hyRequest.request({
