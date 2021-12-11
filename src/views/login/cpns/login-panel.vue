@@ -1,8 +1,8 @@
 <template>
   <div class="login-panal">
     <h1 class="title">后台管理系统</h1>
-    <el-tabs type="border-card" stretch>
-      <el-tab-pane>
+    <el-tabs type="border-card" stretch v-model="currentTab">
+      <el-tab-pane name="account">
         <template #label>
           <span>
             <i class="el-icon-user-solid">账号登陆</i>
@@ -10,13 +10,13 @@
         </template>
         <LoginAccout ref="accountRef" />
       </el-tab-pane>
-      <el-tab-pane>
+      <el-tab-pane name="phone">
         <template #label>
           <span>
             <i class="el-icon-mobile-phone">手机登陆</i>
           </span>
         </template>
-        <LoginPhone />
+        <LoginPhone ref="phoneRef" />
       </el-tab-pane>
     </el-tabs>
     <div class="account-control">
@@ -39,17 +39,27 @@ export default defineComponent({
     LoginAccout
   },
   setup() {
-    // 默认打勾
+    // 1、定义属性
     const isKeepPassword = ref(true)
-    //不默认为空可以执行真正登录,但是需要传泛型是loginaccount但是他是个对象，所以通过typeof拿对象再InstanceType拿实例类型
     const accountRef = ref<InstanceType<typeof LoginAccout>>() //默认为空然后返回再进行绑定logonaccount
-    // 大的告诉小的执行操作：直接拿组件对象ref
+    const phoneRef = ref<InstanceType<typeof LoginPhone>>()
+    const currentTab = ref<string>('account') //类似路由重定向，与model配合使用
+    // 2、定义方法
     const handleLoginClick = () => {
-      console.log('立即登录', accountRef.value) //目的是执行account组件的（accountRef.value.loginaction）
-      accountRef.value?.LoginAction(isKeepPassword.value)
-      // 保证loginAction写错是就标红不用编译运行
+      if (currentTab.value === 'account') {
+        // console.log('立即登录', accountRef.value) //目的是执行account组件的（accountRef.value.loginaction）
+        accountRef.value?.LoginAction(isKeepPassword.value)
+      } else {
+        console.log('phoneRef调用phoneloginAction')
+      }
     }
-    return { handleLoginClick, isKeepPassword, accountRef }
+    return {
+      handleLoginClick,
+      isKeepPassword,
+      accountRef,
+      currentTab,
+      phoneRef
+    }
   }
 })
 </script>
