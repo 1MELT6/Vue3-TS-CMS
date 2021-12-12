@@ -18,6 +18,8 @@ module.exports = {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-irregular-whitespace':
-      process.env.NODE_ENV === 'production' ? 'warn' : 'off' //这禁止掉 空格报错检查
+      process.env.NODE_ENV === 'production' ? 'warn' : 'off', //这禁止掉 空格报错检查
+    '@typescript-eslint/no-explict-any': 'off',
+    '@typescript-eslint/explicit-module-boundary-types': 'off'
   }
 }
