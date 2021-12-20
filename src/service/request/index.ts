@@ -36,14 +36,6 @@ class HYRequest {
     // 添加所有实例都有的拦截器
     this.instance.interceptors.request.use(
       (config) => {
-        // console.log('所有的实例都有的拦截器: 请求成功拦截')
-        // 添加loading,默认全部都有loading
-        // this.loading = ElLoading.service({
-        //   lock: true,
-        //   text: '正在请求数据....',
-        //   background: 'rgba(0,0,0,0.5)'
-        // })
-        // 判断请求是否需要loading
         if (this.showLoading) {
           this.loading = ElLoading.service({
             lock: true,
@@ -63,18 +55,20 @@ class HYRequest {
       (res) => {
         // console.log('所有的实例都有的拦截器: 响应成功拦截')
         // 移除loading
-        setTimeout(() => {
-          this.loading?.close()
-        }, 2000)
+        // setTimeout(() => {
+        this.loading?.close()
+        // }, 2000)
         const data = res.data
         if (data.returnCode === '-1001') {
           console.log('請求失敗~錯誤信息')
         } else {
-          return res.data
+          // console.log(res.data)
+          // {id: 7, name: 'codertest', token: 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Nywib…CdcxPw8TdwDGc-TSHc6_HY0QQSb4yy3bKZ6c2rQKUusfcmOTc'}
+          return data
         }
       },
       (err) => {
-        console.log('所有的实例都有的拦截器: 响应失败拦截')
+        // console.log('所有的实例都有的拦截器: 响应失败拦截')
         this.loading?.close()
 
         if (err.response.status === 404) {
@@ -112,7 +106,9 @@ class HYRequest {
           if (config.interceptors?.responseInterceptor) {
             res = config.interceptors.responseInterceptor(res)
           }
-          console.log(res)
+
+          // console.log(res)
+
           // 2、判断是否显示loading
           // 在96所以重新设置,这样不会影响下一个请求
           this.showLoading = DEFAULT_LOADING
@@ -123,6 +119,7 @@ class HYRequest {
         .catch((err) => {
           // 在96所以重新设置,这样不会影响下一个请求
           this.showLoading = DEFAULT_LOADING
+          reject(err)
           return err
         })
     })
