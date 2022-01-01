@@ -3,7 +3,8 @@ import { IAccount, ILoginResult } from './type'
 
 enum LoginAPI {
   AccountLogin = '/login',
-  LoginUserInfo = '/user/' // 用法: /user/1
+  LoginUserInfo = '/user/', // 用法: /user/1
+  UserMenus = '/role/' // 用法: role/1/menu
 }
 
 export function accountLoginRequest(account: IAccount) {
@@ -16,6 +17,12 @@ export function accountLoginRequest(account: IAccount) {
 export function requestUserInfoById(id: number) {
   return hyRequest.get({
     url: LoginAPI.LoginUserInfo + id,
+    showLoading: false
+  })
+}
+export function requestUserMenusByRoleId(id: number) {
+  return hyRequest.get({
+    url: LoginAPI.UserMenus + id + '/menu',
     showLoading: false
   })
 }

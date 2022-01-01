@@ -1,11 +1,12 @@
-import { createStore } from 'vuex'
+import { createStore, Store, useStore as useVuexStore } from 'vuex'
+
 // 这里声明后下面泛型里使用后，必须实现所有接口里的属性
 // interface IRootState {
 //   name: string
 //   age: number
 // }
 import login from './login/login'
-import { IRootState } from './types'
+import { IRootState, IStoreType } from './types'
 const store = createStore<IRootState>({
   state() {
     return {
@@ -17,5 +18,7 @@ const store = createStore<IRootState>({
     login
   }
 })
-
+export function useStore(): Store<IStoreType> {
+  return useVuexStore()
+}
 export default store

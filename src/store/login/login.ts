@@ -1,7 +1,11 @@
 import { Module } from 'vuex'
 import { IRootState } from '../types'
 import { ILoginState } from './types'
-import { accountLoginRequest, requestUserInfoById } from '@/service/login/login'
+import {
+  accountLoginRequest,
+  requestUserInfoById,
+  requestUserMenusByRoleId
+} from '@/service/login/login'
 import { IAccount } from '@/service/login/type'
 import localCache from '@/utils/cache'
 import router from '@/router'
@@ -17,7 +21,8 @@ const loginModule: Module<ILoginState, IRootState> = {
   state() {
     return {
       token: '',
-      userInfo: {}
+      userInfo: {},
+      userMenus: []
     }
   },
   getters: {},
@@ -29,6 +34,9 @@ const loginModule: Module<ILoginState, IRootState> = {
     },
     changeUserInfo(state, userInfo: any) {
       state.userInfo = userInfo
+    },
+    changeUserMenus(state, userMenus: any) {
+      state.userMenus = userMenus
     }
   },
   actions: {
@@ -50,8 +58,15 @@ const loginModule: Module<ILoginState, IRootState> = {
       commit('changeUserInfo', userInfo)
       localCache.setCache('userInfo', userInfo)
 
+      // 3.请求用户菜单
+      // const userMenusResult = await requestUserMenusByRoleId(id)
+      // const userMenus = userMenusResult
+      // commit('changeUserMenus', userMenus)
+      // localCache.setCache('userMenus', userMenus)
+
       router.push('/main')
     }
+
     // phoneLoginAction({ commit }, payload: any) {
     //   console.log('执行phoneLoginAction', payload)
     // }
