@@ -8,6 +8,7 @@ import {
 } from '@/service/login/login'
 import { IAccount } from '@/service/login/type'
 import localCache from '@/utils/cache'
+import { mapMenuToRoutes } from '@/utils/map-menu'
 import router from '@/router'
 
 // module需要两个参数一个模块的，一个根的state由于过多
@@ -37,6 +38,7 @@ const loginModule: Module<ILoginState, IRootState> = {
     },
     changeUserMenus(state, userMenus: any) {
       state.userMenus = userMenus
+      // mapMenuToRoutes()
     }
   },
   actions: {
