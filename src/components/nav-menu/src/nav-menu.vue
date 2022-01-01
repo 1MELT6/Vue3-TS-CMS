@@ -30,8 +30,8 @@
         </template>
         <!-- 遍历里面的item -->
         <el-menu-item-group>
-          <el-menu-item index="2-1">系统总览</el-menu-item>
-          <el-menu-item index="2-2">食谱统计</el-menu-item>
+          <el-menu-item index="2-1">用户信息</el-menu-item>
+          <el-menu-item index="2-2">其他</el-menu-item>
         </el-menu-item-group>
       </el-submenu>
       <el-submenu index="3">
