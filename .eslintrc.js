@@ -20,6 +20,7 @@ module.exports = {
     'no-irregular-whitespace':
       process.env.NODE_ENV === 'production' ? 'warn' : 'off', //这禁止掉 空格报错检查
     '@typescript-eslint/no-explict-any': 'off',
-    '@typescript-eslint/explicit-module-boundary-types': 'off'
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
+    '@typescript-eslint/no-var-requires': 0
   }
 }
