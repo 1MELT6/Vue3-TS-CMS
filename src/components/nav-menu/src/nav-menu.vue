@@ -12,43 +12,41 @@
       text-color="#b7bdc3"
       active-text-color="#0a60bd"
     >
-      <!-- 二级菜单 -->
-      <!-- 二级菜单的可以展开的标题 -->
-      <el-submenu index="1">
-        <template #title>
-          <i class="el-icon-monitor"></i><span>系统总览</span>
+      <template v-for="item in list" :key="item.id">
+        <!-- 二级菜单 -->
+        <template v-if="item.type === 1">
+          <!-- 二级菜单的可以展开的标题 -->
+          <el-submenu :index="item.id + ''">
+            <template #title>
+              <i v-if="item.icon" :class="item.icon"></i>
+              <span>{{ item.name }}</span>
+            </template>
+            <!-- 遍历里面的item -->
+            <template v-for="subitem in item.children" :key="subitem.id">
+              <el-menu-item
+                :index="subitem.id + ''"
+                @click="handleMenuItemClick(subitem)"
+              >
+                <i v-if="subitem.icon" :class="subitem.icon"></i>
+                <span>{{ subitem.name }}</span>
+              </el-menu-item>
+            </template>
+          </el-submenu>
         </template>
-        <!-- 遍历里面的item -->
-        <el-menu-item-group>
-          <el-menu-item index="1-1">核心技术</el-menu-item>
-          <el-menu-item index="1-2">食谱统计</el-menu-item>
-        </el-menu-item-group>
-      </el-submenu>
-      <el-submenu index="2">
-        <template #title>
-          <i class="el-icon-setting"></i><span>系统管理</span>
+        <!-- 一级菜单 -->
+        <template v-else-if="item.type === 2">
+          <el-menu-item :index="item.id + ''">
+            <i v-if="item.icon" :class="item.icon"></i>
+            <span>{{ item.name }}</span>
+          </el-menu-item>
         </template>
-        <!-- 遍历里面的item -->
-        <el-menu-item-group>
-          <el-menu-item index="2-1">用户信息</el-menu-item>
-          <el-menu-item index="2-2">其他</el-menu-item>
-        </el-menu-item-group>
-      </el-submenu>
-      <el-submenu index="3">
-        <template #title>
-          <i class="el-icon-edit"></i><span>食谱中心</span>
-        </template>
-        <!-- 遍历里面的item -->
-        <el-menu-item-group>
-          <el-menu-item index="3-1">食谱管理</el-menu-item>
-          <el-menu-item index="3-2">食材管理</el-menu-item>
-        </el-menu-item-group>
-      </el-submenu>
+      </template>
     </el-menu>
   </div>
 </template>
 
 <script lang="ts">
+import { useRouter } from 'vue-router'
 import { defineComponent } from 'vue'
 
 // vuex - typescript  => pinia
@@ -61,7 +59,83 @@ export default defineComponent({
     }
   },
   setup() {
-    return {}
+    const router = useRouter()
+    const handleMenuItemClick = (item: any) => {
+      console.log(item.url)
+      router.push(item.url)
+    }
+
+    const list = [
+      {
+        name: '系统总览',
+        id: '1',
+        type: 1,
+        icon: 'el-icon-monitor',
+        children: [
+          {
+            name: '技术总览',
+            id: '1-1',
+            type: 2,
+            url: '/main/analysis/overview',
+            icon: 'el-icon-menu'
+          },
+          {
+            name: '可视化',
+            id: '1-2',
+            type: 2,
+            url: '/main/analysis/dashboard',
+            icon: 'el-icon-menu'
+          }
+        ]
+      },
+      {
+        name: '系统管理',
+        id: '2',
+        type: 1,
+        icon: 'el-icon-setting',
+        children: [
+          {
+            name: '用户管理',
+            id: '2-1',
+            type: 2,
+            url: '/main/user',
+            icon: 'el-icon-document-copy'
+          }
+          // },
+          // {
+          //   name: '账号专栏',
+          //   id: '2-2',
+          //   type: 2,
+          //   url: '/main/user',
+          //   icon: 'el-icon-document-copy'
+          // }
+        ]
+      },
+      {
+        name: '食谱中心',
+        id: '3',
+        type: 1,
+        icon: 'el-icon-edit',
+        children: [
+          {
+            name: '食谱管理',
+            id: '3-1',
+            type: 2,
+            url: '/main/center/recipe',
+            icon: 'el-icon-document-copy'
+          },
+          {
+            name: '食材管理',
+            id: '3-2',
+            type: 2,
+            url: '/main/center/food',
+            icon: 'el-icon-document-copy'
+          }
+        ]
+      }
+    ]
+
+    return { list, handleMenuItemClick }
   }
 })
 </script>

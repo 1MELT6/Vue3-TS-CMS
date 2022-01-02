@@ -8,7 +8,7 @@ import {
 } from '@/service/login/login'
 import { IAccount } from '@/service/login/type'
 import localCache from '@/utils/cache'
-import { mapMenuToRoutes } from '@/utils/map-menu'
+// import { mapMenuToRoutes } from '@/utils/map-menu'
 import router from '@/router'
 
 // module需要两个参数一个模块的，一个根的state由于过多
@@ -36,14 +36,20 @@ const loginModule: Module<ILoginState, IRootState> = {
     changeUserInfo(state, userInfo: any) {
       state.userInfo = userInfo
       console.log(state)
-      mapMenuToRoutes()
-    },
-    changeUserMenus(state, userMenus: any) {
-      state.userMenus = userMenus
-      console.log(state)
-
       // mapMenuToRoutes()
+      // const routes = mapMenuToRoutes()
+      // 动态添加一级路由，需要进行遍历所有路由，再去nav-menu进行点击事件操作
+      // router.addRoute(routes)
+      // routes.forEach((route) => {
+      //   router.addRoute('main', route)
+      // })
     }
+    // changeUserMenus(state, userMenus: any) {
+    //   state.userMenus = userMenus
+    //   console.log(state)
+
+    // mapMenuToRoutes()
+    // }
   },
   actions: {
     // 1.实现登录逻辑

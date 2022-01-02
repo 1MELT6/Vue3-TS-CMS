@@ -1,17 +1,17 @@
 <template>
-  <div style="background: red" class="user">user</div>
+  <div>
+    <h2>Not Found</h2>
+  </div>
 </template>
+
 <script lang="ts">
 import { defineComponent } from 'vue'
+
 export default defineComponent({
-  name: 'user',
   setup() {
     return {}
   }
 })
 </script>
-<style scoped>
-.user {
-  position: absolute;
-}
-</style>
+
+<style scoped></style>
