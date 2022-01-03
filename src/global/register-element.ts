@@ -20,7 +20,15 @@ import {
   ElSubmenu,
   ElRadioButton,
   ElRadioGroup,
-  ElIcon
+  ElIcon,
+  ElDropdown,
+  ElDropdownItem,
+  ElDropdownMenu,
+  ElOption,
+  ElRow,
+  ElSelect,
+  ElCol,
+  ElDatePicker
 } from 'element-plus'
 
 const components = [
@@ -44,7 +52,28 @@ const components = [
   ElRadioButton,
   ElRadioGroup,
   Location,
-  ElIcon
+  ElIcon,
+  ElDropdown,
+  ElDropdownItem,
+  ElDropdownMenu,
+  ElForm,
+  ElFormItem,
+  ElHeader,
+  ElInput,
+  ElLink,
+  ElMain,
+  ElMenu,
+  ElMenuItem,
+  ElMenuItemGroup,
+  ElOption,
+  ElRadio,
+  ElRow,
+  ElCol,
+  ElSelect,
+  ElDatePicker,
+  ElSubmenu,
+  ElTabPane,
+  ElTabs
   // Document
 ]
 
