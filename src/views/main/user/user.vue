@@ -1,6 +1,7 @@
 <template>
   <div class="user">
-    <hy-form v-bind="searchFormConfig" :formData="formData" />
+    <hy-form v-bind="searchFormConfig" :modelValue="formData" />
+    <!-- <hy-form v-bind="searchFormConfig" v-model="formData" /> -->
     <div class="content"></div>
   </div>
 </template>
