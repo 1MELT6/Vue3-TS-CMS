@@ -1,13 +1,12 @@
 <template>
   <div class="user">
-    <hy-form v-bind="searchFormConfig" :modelValue="formData" />
-    <!-- <hy-form v-bind="searchFormConfig" v-model="formData" /> -->
+    <hy-form v-bind="searchFormConfig" v-model="formData" />
     <div class="content"></div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from 'vue'
+import { defineComponent, ref } from 'vue'
 import HyForm from '@/base-ui/form'
 
 import { searchFormConfig } from './config/search.config'
@@ -18,7 +17,8 @@ export default defineComponent({
     HyForm
   },
   setup() {
-    const formData = reactive({
+    // ref对双向绑定更兼容
+    const formData = ref({
       id: '',
       name: '',
       password: '',

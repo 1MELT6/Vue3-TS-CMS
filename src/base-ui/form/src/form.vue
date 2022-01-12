@@ -50,7 +50,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, PropType } from 'vue'
+import { defineComponent, PropType, ref, watch } from 'vue'
 import { IFormItem } from '../types'
 
 export default defineComponent({
@@ -84,14 +84,12 @@ export default defineComponent({
   },
   emits: ['update:modelValue'],
   setup(props, { emit }) {
-    // formdata用的get里的modelvalue
-    const formData = computed({
-      get: () => props.modelValue,
-      set: (newValue) => {
-        // 弊端：当formdata里的某个属性发生变化不会再次调用set
-        // 所以这里等于没写，use里的v-model可以直接携程modelvalue和之前没差
-        // emit('update:modelValue', newValue)
-      }
+    // 拷贝了一份放到对象里
+    const formData = ref({ ...props.modelValue })
+    // user里面的formdata更改但是外面的formdata没有更改，
+    // 所以要自己监听数据的改变
+    watch(formData, (newValue) => emit('update:modelValue', newValue), {
+      deep: true
     })
     return {
       formData
