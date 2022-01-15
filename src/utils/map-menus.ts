@@ -7,16 +7,16 @@ export function pathMapBreadcrumbs(list: any[], currentPath: string) {
   const breadcrumbs: IBreadcrumb[] = []
 
   for (const menu of list) {
-    console.log(menu.children)
+    // console.log(menu.children)
 
     if (menu.type === 1) {
       const findMenu = pathMapToMenu(menu.children ?? [], currentPath)
-      console.log(findMenu)
+      // console.log(findMenu)
 
       if (findMenu) {
         breadcrumbs.push({ name: menu.name, path: menu.url })
         breadcrumbs.push({ name: findMenu.name, path: findMenu.url })
-        console.log('----------------')
+        // console.log('----------------')
 
         return findMenu
       }

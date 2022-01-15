@@ -1,5 +1,5 @@
 import { createStore, Store, useStore as useVuexStore } from 'vuex'
-
+import user from './main/user/user'
 // 这里声明后下面泛型里使用后，必须实现所有接口里的属性
 // interface IRootState {
 //   name: string
@@ -15,7 +15,8 @@ const store = createStore<IRootState>({
     }
   },
   modules: {
-    login
+    login,
+    user
   }
 })
 export function useStore(): Store<IStoreType> {
