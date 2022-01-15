@@ -28,7 +28,9 @@ import {
   ElRow,
   ElSelect,
   ElCol,
-  ElDatePicker
+  ElDatePicker,
+  ElBreadcrumb,
+  ElBreadcrumbItem
 } from 'element-plus'
 
 const components = [
@@ -44,7 +46,6 @@ const components = [
   ElContainer,
   ElAside,
   ElMain,
-  ElHeader,
   ElMenu,
   ElMenuItem,
   ElMenuItemGroup,
@@ -56,24 +57,14 @@ const components = [
   ElDropdown,
   ElDropdownItem,
   ElDropdownMenu,
-  ElForm,
-  ElFormItem,
   ElHeader,
-  ElInput,
-  ElLink,
-  ElMain,
-  ElMenu,
-  ElMenuItem,
-  ElMenuItemGroup,
   ElOption,
-  ElRadio,
   ElRow,
   ElCol,
   ElSelect,
   ElDatePicker,
-  ElSubmenu,
-  ElTabPane,
-  ElTabs
+  ElBreadcrumb,
+  ElBreadcrumbItem
   // Document
 ]
 

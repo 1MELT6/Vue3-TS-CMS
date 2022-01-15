@@ -5,7 +5,13 @@ import localCache from '@/utils/cache'
 // interface RouterRecoid
 
 const routes: RouteRecordRaw[] = [
-  { path: '/', redirect: '/login' },
+  {
+    path: '/',
+    redirect: '/login',
+    meta: {
+      title: '登录'
+    }
+  },
   {
     path: '/login',
     name: 'login',
@@ -16,31 +22,56 @@ const routes: RouteRecordRaw[] = [
     name: 'main',
     // component: () => import('@/components/common.vue'),
     component: () => import('@/views/main/main.vue'),
+    meta: {
+      title: '首页',
+      showInbreadcrumb: false
+    },
     children: [
       {
         path: 'analysis/dashboard',
         name: 'dashboard',
-        component: () => import('@/views/main/analysis/dashboard/dashboard.vue')
+        component: () =>
+          import('@/views/main/analysis/dashboard/dashboard.vue'),
+        meta: {
+          title: '技术总览',
+          showInbreadcrumb: true
+        }
       },
       {
         path: 'analysis/overview',
         name: 'overview',
-        component: () => import('@/views/main/analysis/overview/overview.vue')
+        component: () => import('@/views/main/analysis/overview/overview.vue'),
+        meta: {
+          title: '可视化中心',
+          showInbreadcrumb: true
+        }
       },
       {
         path: 'center/food',
         name: 'food',
-        component: () => import('@/views/main/center/food/food.vue')
+        component: () => import('@/views/main/center/food/food.vue'),
+        meta: {
+          title: '食材管理',
+          showInbreadcrumb: true
+        }
       },
       {
         path: 'center/recipe',
         name: 'recipe',
-        component: () => import('@/views/main/center/recipe/recipe.vue')
+        component: () => import('@/views/main/center/recipe/recipe.vue'),
+        meta: {
+          title: '食谱管理',
+          showInbreadcrumb: true
+        }
       },
       {
         path: 'user',
         name: 'user',
-        component: () => import('@/views/main/user/user.vue')
+        component: () => import('@/views/main/user/user.vue'),
+        meta: {
+          title: '用户管理',
+          showInbreadcrumb: true
+        }
       }
     ]
   },
@@ -62,6 +93,9 @@ router.beforeEach((to) => {
     if (!token) {
       return '/login'
     }
+  }
+  if (to.path === '/main') {
+    return '/main/analysis/overview'
   }
 })
 

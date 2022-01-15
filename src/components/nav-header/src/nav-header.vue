@@ -6,7 +6,7 @@
       @click="handleFoldClick"
     ></i>
     <div class="content">
-      <div>面包屑</div>
+      <breadcrumb :breadcrumbs="breadcrumbs" />
       <div>
         <el-dropdown>
           <span class="el-dropdown-link">
@@ -30,9 +30,17 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { defineComponent, ref, computed } from 'vue'
+import { useRoute } from 'vue-router'
 import localCache from '@/utils/cache'
+import Breadcrumb, { IBreadcrumb } from '@/base-ui/breadcrumb'
+import { pathMapBreadcrumbs } from '@/utils/map-menus'
+import { list } from '../../nav-menu/index'
+
 export default defineComponent({
+  components: {
+    Breadcrumb
+  },
   emits: ['foldChange'],
   setup(props, { emit }) {
     const isFold = ref(false)
@@ -41,11 +49,20 @@ export default defineComponent({
       emit('foldChange', isFold.value)
     }
 
+    const breadcrumbs = computed(() => {
+      const route = useRoute()
+      const currentPath = route.path
+      return pathMapBreadcrumbs(list, currentPath)
+    })
+
     const name = localCache.getCache('name')
     return {
       isFold,
       handleFoldClick,
-      name
+      name,
+      breadcrumbs,
+      pathMapBreadcrumbs,
+      list
     }
   }
 })
