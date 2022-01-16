@@ -12,10 +12,28 @@
           <el-table-column v-bind="propItem" align="center"></el-table-column>
         </template> -->
       <!-- </el-table> -->
-      <c-table :listData="userList" :propList="propList">
+      <c-table
+        :listData="userList"
+        :propList="propList"
+        :showIndexColumn="showIndexColumn"
+        :showSelectColumn="showSelectColumn"
+      >
         <!-- 动态改变样式，具名插槽 -->
         <template #password="scope">
-          <el-button>{{ scope.row.password }}</el-button>
+          <strong>{{ scope.row.password }}</strong>
+        </template>
+        <template #updateAt="scope">
+          <strong>{{ $filters.formatTime(scope.row.updateAt) }}</strong>
+        </template>
+        <template #createAt="scope">
+          <strong>{{ $filters.formatTime(scope.row.createAt) }}</strong>
+        </template>
+        <!-- scope作用域插槽 -->
+        <template #handler>
+          <div class="handle-btns">
+            <el-button icon="el-icon-edit" type="text">编辑</el-button>
+            <el-button icon="el-icon-delete" type="text">删除</el-button>
+          </div>
         </template>
       </c-table>
     </div>
@@ -56,14 +74,19 @@ export default defineComponent({
         slotName: 'password'
       },
       { prop: 'createAt', label: '创建时间', minwidth: '250' },
-      { prop: 'updateAt', label: '更新时间', minwidth: '250' }
+      { prop: 'updateAt', label: '更新时间', minwidth: '250' },
+      { label: '操作', midwidth: 120, slotName: 'handler' }
     ]
 
+    const showSelectColumn = true
+    const showIndexColumn = true
     return {
       searchFormConfig,
       userList,
       userAccount,
-      propList
+      propList,
+      showSelectColumn,
+      showIndexColumn
     }
   }
 })
