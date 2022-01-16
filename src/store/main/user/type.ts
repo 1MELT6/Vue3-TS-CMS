@@ -1,4 +1,4 @@
-export interface IuserState{
-  userList:any[],
-  userAccount:number
+export interface IuserState {
+  userList: any[]
+  userAccount: number
 }

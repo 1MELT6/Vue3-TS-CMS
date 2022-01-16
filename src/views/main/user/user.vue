@@ -1,19 +1,36 @@
 <template>
   <div class="user">
     <page-search :searchFormConfig="searchFormConfig" />
-    <div class="content"></div>
+    <div class="content">
+      <!-- <el-table :data="userList" border style="width: 100%"> -->
+      <!--方法一：死固定 <el-table-column
+          prop="name"
+          label="用户名"
+          min-width="180"
+        ></el-table-column> -->
+      <!-- 方法二：每一列格式固定<template v-for="propItem in propList" :key="propItem.prop">
+          <el-table-column v-bind="propItem" align="center"></el-table-column>
+        </template> -->
+      <!-- </el-table> -->
+      <c-table :listData="userList" :propList="propList">
+        <!-- 动态改变样式，具名插槽 -->
+        <template #password="scope">
+          <el-button>{{ scope.row.password }}</el-button>
+        </template>
+      </c-table>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { computed, defineComponent } from 'vue'
 import { useStore } from 'vuex'
 import pageSearch from '@/components/page-search/src/page-search.vue'
 import { searchFormConfig } from './config/search.config'
-
+import CTable from '@/base-ui/table'
 export default defineComponent({
   name: 'user',
-  components: { pageSearch },
+  components: { pageSearch, CTable },
   setup() {
     // 2、拿到usestore请求数据
 
@@ -25,8 +42,28 @@ export default defineComponent({
         size: 10
       }
     })
+
+    // 随着更新重新计算
+    const userList = computed(() => store.state.user.userList)
+    const userAccount = computed(() => store.state.user.userAccount)
+
+    const propList = [
+      { prop: 'name', label: '账号名', minwidth: '100' },
+      {
+        prop: 'password',
+        label: '密码',
+        minwidth: '100',
+        slotName: 'password'
+      },
+      { prop: 'createAt', label: '创建时间', minwidth: '250' },
+      { prop: 'updateAt', label: '更新时间', minwidth: '250' }
+    ]
+
     return {
-      searchFormConfig
+      searchFormConfig,
+      userList,
+      userAccount,
+      propList
     }
   }
 })
@@ -39,6 +76,10 @@ export default defineComponent({
 .handle-btns {
   text-align: right;
   padding: 0px 50px 20px 0px;
+}
+.content {
+  padding: 20px;
+  border-top: 20px solid #f5f5f5;
 }
 </style>
 
