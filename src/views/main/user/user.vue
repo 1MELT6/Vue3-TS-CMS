@@ -17,7 +17,12 @@
         :propList="propList"
         :showIndexColumn="showIndexColumn"
         :showSelectColumn="showSelectColumn"
+        :title="title"
       >
+        <template #headerHandler>
+          <el-button type="primary">新增用户</el-button>
+          <el-button icon="el-icon-refresh">刷新</el-button>
+        </template>
         <!-- 动态改变样式，具名插槽 -->
         <template #password="scope">
           <strong>{{ scope.row.password }}</strong>
@@ -61,6 +66,7 @@ export default defineComponent({
       }
     })
 
+    const title = '用户类别'
     // 随着更新重新计算
     const userList = computed(() => store.state.user.userList)
     const userAccount = computed(() => store.state.user.userAccount)
@@ -81,6 +87,7 @@ export default defineComponent({
     const showSelectColumn = true
     const showIndexColumn = true
     return {
+      title,
       searchFormConfig,
       userList,
       userAccount,
