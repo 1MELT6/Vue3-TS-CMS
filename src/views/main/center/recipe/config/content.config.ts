@@ -1,13 +1,12 @@
 export const contentTableConfig = {
-  title: '用户管理',
+  title: '菜谱管理',
 
   propList: [
-    { prop: 'name', label: '账号名', minwidth: '100' },
+    { prop: 'name', label: '菜谱', minwidth: '100' },
     {
-      prop: 'password',
-      label: '密码',
-      minwidth: '100',
-      slotName: 'password'
+      prop: 'description',
+      label: '描述',
+      minwidth: '100'
     },
     { prop: 'createAt', label: '创建时间', minwidth: '250' },
     { prop: 'updateAt', label: '更新时间', minwidth: '250' },

@@ -1,16 +1,18 @@
 <template>
   <div class="user">
     <page-search :searchFormConfig="searchFormConfig" />
-    <page-content :contentTableConfig="contentTableConfig" />
+    <page-content :contentTableConfig="contentTableConfig" pageName="user" />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+
+import PageContent from '@/components/page-content/src/page-content.vue'
 import pageSearch from '@/components/page-search/src/page-search.vue'
+
 import { searchFormConfig } from './config/search.config'
 import { contentTableConfig } from './config/content.config'
-import PageContent from '@/components/page-content/src/page-content.vue'
 export default defineComponent({
   name: 'user',
   components: { pageSearch, PageContent },

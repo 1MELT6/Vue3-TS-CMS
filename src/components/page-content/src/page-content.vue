@@ -1,6 +1,6 @@
 <template>
   <div class="content">
-    <c-table :listData="userList" v-bind="contentTableConfig">
+    <c-table :listData="dataList" v-bind="contentTableConfig">
       <template #headerHandler>
         <el-button type="primary">新增用户</el-button>
         <el-button icon="el-icon-refresh">刷新</el-button>
@@ -27,7 +27,8 @@
 </template>
 <script lang="ts">
 import { defineComponent, computed } from 'vue'
-import { useStore } from 'vuex'
+import { useStore } from '@/store'
+
 import CTable from '@/base-ui/table'
 export default defineComponent({
   components: {
@@ -37,14 +38,20 @@ export default defineComponent({
     contentTableConfig: {
       type: Object,
       required: true
+    },
+    pageName: {
+      type: String,
+      required: true
     }
   },
-  setup() {
+  setup(props) {
     // 2、拿到usestore请求数据
 
     const store = useStore()
     store.dispatch('user/getUserListAction', {
-      pageUrl: '/user/list',
+      // pageUrl: '/user/list',
+      // pageName: '/list',
+      pageName: props.pageName,
       queryInfo: {
         offset: 0,
         size: 10
@@ -52,10 +59,12 @@ export default defineComponent({
     })
 
     // 随着更新重新计算
-    const userList = computed(() => store.state.user.userList)
-    const userAccount = computed(() => store.state.user.userAccount)
-
-    return { userList, userAccount }
+    // const userList = computed(() => store.state.user.userList)
+    // const userAccount = computed(() => store.state.user.userAccount)
+    const dataList = computed(() =>
+      store.getters[`user/pageListData`](props.pageName)
+    )
+    return { dataList }
   }
 })
 </script>
