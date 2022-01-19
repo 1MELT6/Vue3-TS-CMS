@@ -27,8 +27,7 @@
 </template>
 <script lang="ts">
 import { defineComponent, computed } from 'vue'
-import { useStore } from '@/store'
-
+import { useStore } from 'vuex'
 import CTable from '@/base-ui/table'
 export default defineComponent({
   components: {
@@ -37,7 +36,7 @@ export default defineComponent({
   props: {
     contentTableConfig: {
       type: Object,
-      required: true
+      require: true
     },
     pageName: {
       type: String,
@@ -50,8 +49,8 @@ export default defineComponent({
     const store = useStore()
     store.dispatch('user/getUserListAction', {
       // pageUrl: '/user/list',
-      // pageName: '/list',
       pageName: props.pageName,
+
       queryInfo: {
         offset: 0,
         size: 10
@@ -59,12 +58,14 @@ export default defineComponent({
     })
 
     // 随着更新重新计算
-    // const userList = computed(() => store.state.user.userList)
-    // const userAccount = computed(() => store.state.user.userAccount)
     const dataList = computed(() =>
       store.getters[`user/pageListData`](props.pageName)
     )
-    return { dataList }
+    // const userCount = computed(() => store.state.system.userCount)
+
+    return {
+      dataList
+    }
   }
 })
 </script>

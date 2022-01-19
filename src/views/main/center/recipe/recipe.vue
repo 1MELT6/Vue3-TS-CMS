@@ -1,6 +1,6 @@
 <template>
   <div class="recipe">
-    <page-content :contentTableConfig="contentTableConfig" :pageName="recipe" />
+    <page-content :contentTableConfig="contentTableConfig" pageName="recipe" />
   </div>
 </template>
 <script lang="ts">
