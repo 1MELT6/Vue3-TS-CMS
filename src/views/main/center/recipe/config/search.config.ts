@@ -10,16 +10,16 @@ export const searchFormConfig: IForm = {
   },
   formItems: [
     {
-      field: 'id',
-      type: 'input',
-      label: 'id',
-      placeholder: '请输入id'
-    },
-    {
       field: 'name',
       type: 'input',
-      label: '用户名',
-      placeholder: '请输入用户名'
+      label: '名称',
+      placeholder: '请输入菜谱名称'
+    },
+    {
+      field: 'description',
+      type: 'input',
+      label: '描述',
+      placeholder: '请输入关键字描述'
     },
 
     {

@@ -19,7 +19,8 @@
                   :placeholder="item.placeholder"
                   v-bind="item.otherOptions"
                   :show-password="item.type === 'password'"
-                  v-model="formData[`${item.field}`]"
+                  :model-value="modelValue[`${item.field}`]"
+                  @update:modelValue="handleValueChange($event, item.field)"
                 />
               </template>
               <template v-else-if="item.type === 'select'">
@@ -27,7 +28,8 @@
                   :placeholder="item.placeholder"
                   v-bind="item.otherOptions"
                   style="width: 100%"
-                  v-model="formData[`${item.field}`]"
+                  :model-value="modelValue[`${item.field}`]"
+                  @update:modelValue="handleValueChange($event, item.field)"
                 >
                   <el-option
                     v-for="option in item.options"
@@ -41,8 +43,10 @@
                 <el-date-picker
                   style="width: 100%"
                   v-bind="item.otherOptions"
-                  v-model="formData[`${item.field}`]"
+                  :model-value="modelValue[`${item.field}`]"
+                  @update:modelValue="handleValueChange($event, item.field)"
                 ></el-date-picker>
+                <!-- v-model="formData[`${item.field}`]"  45-->
               </template>
             </el-form-item>
           </el-col>
@@ -90,15 +94,23 @@ export default defineComponent({
   },
   emits: ['update:modelValue'],
   setup(props, { emit }) {
+    // 做法一：双向绑定
     // 拷贝了一份放到对象里
-    const formData = ref({ ...props.modelValue })
+    // const formData = ref({ ...props.modelValue })
     // user里面的formdata更改但是外面的formdata没有更改，
     // 所以要自己监听数据的改变
-    watch(formData, (newValue) => emit('update:modelValue', newValue), {
-      deep: true
-    })
+    // watch(formData, (newValue) => emit('update:modelValue', newValue), {
+    // deep: true
+    // })
+
+    // 作法二：双向绑定基础原理
+    const handleValueChange = (value: any, field: string) => {
+      emit('update:modelValue', { ...props.modelValue, [field]: value })
+    }
+
     return {
-      formData
+      // formData
+      handleValueChange
     }
   }
 })

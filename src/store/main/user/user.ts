@@ -47,7 +47,7 @@ const userModule: Module<IuserState, IRootState> = {
     async getUserListAction({ commit }, payload: any) {
       // 1、怎样发送请求在user里的setup拿到usestore
       // console.log(payload.queryInfo) //拿到了url和size等
-      console.log(payload)
+      // console.log(payload)
 
       const pageName = payload.pageName
       // const pageUrl = ${pageName}/list
@@ -65,7 +65,7 @@ const userModule: Module<IuserState, IRootState> = {
       // 1、对页面发送真真请求->进入service->userts
       const pageResult = await getUserListData(pageUrl, payload.queryInfo)
       // 2、获得数据并存储state
-      // console.log(pageResult)
+      console.log(payload.queryInfo)
       const totalCount = pageResult.length
 
       // 方法三：es6语法

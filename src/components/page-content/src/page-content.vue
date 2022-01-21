@@ -47,16 +47,20 @@ export default defineComponent({
     // 2、拿到usestore请求数据
 
     const store = useStore()
-    store.dispatch('user/getUserListAction', {
-      // pageUrl: '/user/list',
-      pageName: props.pageName,
 
-      queryInfo: {
-        offset: 0,
-        size: 10
-      }
-    })
+    const getPageData = (queryInfo: any = {}) => {
+      console.log(queryInfo)
 
+      store.dispatch('user/getUserListAction', {
+        pageName: props.pageName,
+        queryInfo: {
+          offset: 0,
+          size: 10,
+          ...queryInfo
+        }
+      })
+    }
+    getPageData()
     // 随着更新重新计算
     const dataList = computed(() =>
       store.getters[`user/pageListData`](props.pageName)
@@ -64,7 +68,8 @@ export default defineComponent({
     // const userCount = computed(() => store.state.system.userCount)
 
     return {
-      dataList
+      dataList,
+      getPageData
     }
   }
 })
