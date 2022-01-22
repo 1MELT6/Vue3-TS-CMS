@@ -7,9 +7,9 @@ const userModule: Module<IuserState, IRootState> = {
   state() {
     return {
       userList: [],
-      userAccount: 0,
+      userCount: 0,
       recipeList: [],
-      recipeAccount: 0
+      recipeCount: 0
     }
   },
   mutations: {
@@ -17,29 +17,25 @@ const userModule: Module<IuserState, IRootState> = {
     changeUserList(state, userList: any[]) {
       state.userList = userList
     },
-    changeUserCount(state, userAccount: number) {
-      state.userAccount = userAccount
+    changeUserCount(state, userCount: number) {
+      state.userCount = userCount
     },
     changeRecipeList(state, recipeList: any[]) {
       state.recipeList = recipeList
     },
-    changeRecipeCount(state, recipeAccount: number) {
-      state.recipeAccount = recipeAccount
+    changeRecipeCount(state, recipeCount: number) {
+      state.recipeCount = recipeCount
     }
   },
   getters: {
     pageListData(state) {
       return (pageName: string) => {
         return (state as any)[`${pageName}List`]
-
-        // switch (pageName) {
-        //   case 'users':
-        //     return state.userList
-        //   case 'role':
-        //     return state.recipeList
-        //   default:
-        //     return state.userList
-        // }
+      }
+    },
+    pageListCount(state) {
+      return (pageNumber: string) => {
+        return (state as any)[`${pageNumber}Count`]
       }
     }
   },

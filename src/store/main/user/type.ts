@@ -1,6 +1,6 @@
 export interface IuserState {
   userList: any[]
-  userAccount: number
+  userCount: number
   recipeList: any[]
-  recipeAccount: number
+  recipeCount: number
 }

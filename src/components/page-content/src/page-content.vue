@@ -1,6 +1,11 @@
 <template>
   <div class="content">
-    <c-table :listData="dataList" v-bind="contentTableConfig">
+    <c-table
+      :listData="dataList"
+      :listCount="dataCount"
+      v-bind="contentTableConfig"
+      v-model:page="pageInfo"
+    >
       <template #headerHandler>
         <el-button type="primary">新增用户</el-button>
         <el-button icon="el-icon-refresh">刷新</el-button>
@@ -26,7 +31,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, computed } from 'vue'
+import { defineComponent, computed, ref, watch } from 'vue'
 import { useStore } from 'vuex'
 import CTable from '@/base-ui/table'
 export default defineComponent({
@@ -44,6 +49,9 @@ export default defineComponent({
     }
   },
   setup(props) {
+    // 页数双向绑定
+    const pageInfo = ref({ currentPage: 0, pageSize: 10 })
+    watch(pageInfo, () => getPageData)
     // 2、拿到usestore请求数据
 
     const store = useStore()
@@ -54,8 +62,8 @@ export default defineComponent({
       store.dispatch('user/getUserListAction', {
         pageName: props.pageName,
         queryInfo: {
-          offset: 0,
-          size: 10,
+          offset: pageInfo.value.currentPage * pageInfo.value.pageSize,
+          size: pageInfo.value.pageSize,
           ...queryInfo
         }
       })
@@ -65,11 +73,14 @@ export default defineComponent({
     const dataList = computed(() =>
       store.getters[`user/pageListData`](props.pageName)
     )
-    // const userCount = computed(() => store.state.system.userCount)
-
+    const dataCount = computed(() =>
+      store.getters[`user/pageListCount`](props.pageName)
+    )
     return {
       dataList,
-      getPageData
+      getPageData,
+      dataCount,
+      pageInfo
     }
   }
 })
