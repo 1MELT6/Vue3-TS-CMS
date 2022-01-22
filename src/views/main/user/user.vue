@@ -16,6 +16,7 @@
       :defaultInfo="defaultInfo"
       ref="pageModalRef"
       :modalConfig="modalConfig"
+      pageName="user"
     ></page-modal>
   </div>
 </template>
@@ -47,6 +48,7 @@ export default defineComponent({
       console.log(queryInfo)
     }
     const hanldeNewData = () => {
+      defaultInfo.value = {}
       if (pageModalRef.value) {
         pageModalRef.value.dialogVisible = true
       }

@@ -1,7 +1,12 @@
 import { IRootState } from '@/store/types'
 import { Module } from 'vuex'
 import { IuserState } from './type'
-import { deletaPageData, getUserListData } from '@/service/main/user/user'
+import {
+  deletaPageData,
+  getUserListData,
+  createPageData,
+  editPageData
+} from '@/service/main/user/user'
 const userModule: Module<IuserState, IRootState> = {
   namespaced: true, //作用域
   state() {
@@ -99,7 +104,35 @@ const userModule: Module<IuserState, IRootState> = {
         pageName,
         queryInfo: {
           offset: 0,
-          size: 20
+          size: 10
+        }
+      })
+    },
+    async createPageDataAction({ dispatch }, payload: any) {
+      // 创建数据的请求
+      const { pageName, newData } = payload
+      const pageUrl = `/${pageName}`
+      await createPageData(pageUrl, newData)
+      // 请求最新数据
+      dispatch('getPageListAction', {
+        pageName,
+        queryInfo: {
+          offset: 0,
+          size: 10
+        }
+      })
+    },
+    async editPageDataAction({ dispatch }, payload: any) {
+      // 编辑数据的请求
+      const { pageName, editData, id } = payload
+      const pageUrl = `/${pageName}/${id}`
+      await editPageData(pageUrl, editData)
+      // 请求最新数据
+      dispatch('getPageListAction', {
+        pageName,
+        queryInfo: {
+          offset: 0,
+          size: 10
         }
       })
     }
