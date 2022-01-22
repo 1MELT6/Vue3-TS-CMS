@@ -8,3 +8,9 @@ export function getUserListData(url: string, queryInfo: any) {
     data: queryInfo
   })
 }
+
+export function deletaPageData(url: string) {
+  return hyRequest.delete<any>({
+    url: url
+  })
+}

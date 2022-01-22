@@ -21,10 +21,15 @@
         <strong>{{ $filters.formatTime(scope.row.createAt) }}</strong>
       </template>
       <!-- scope作用域插槽 -->
-      <template #handler>
+      <template #handler="scope">
         <div class="handle-btns">
           <el-button icon="el-icon-edit" type="text">编辑</el-button>
-          <el-button icon="el-icon-delete" type="text">删除</el-button>
+          <el-button
+            icon="el-icon-delete"
+            type="text"
+            @click="handleDeleteClick(scope.row)"
+            >删除</el-button
+          >
         </div>
       </template>
     </c-table>
@@ -76,11 +81,20 @@ export default defineComponent({
     const dataCount = computed(() =>
       store.getters[`user/pageListCount`](props.pageName)
     )
+
+    const handleDeleteClick = (item: any) => {
+      // console.log(item)
+      store.dispatch('user/deletePageDataAction', {
+        pageName: props.pageName,
+        id: item.id
+      })
+    }
     return {
       dataList,
       getPageData,
       dataCount,
-      pageInfo
+      pageInfo,
+      handleDeleteClick
     }
   }
 })

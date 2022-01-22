@@ -1,7 +1,7 @@
 import { IRootState } from '@/store/types'
 import { Module } from 'vuex'
 import { IuserState } from './type'
-import { getUserListData } from '@/service/main/user/user'
+import { deletaPageData, getUserListData } from '@/service/main/user/user'
 const userModule: Module<IuserState, IRootState> = {
   namespaced: true, //作用域
   state() {
@@ -86,6 +86,22 @@ const userModule: Module<IuserState, IRootState> = {
       // 方法一：固定
       // commit('changeUserList', pageResult)
       // commit('changeUserCount', totalCount)
+    },
+
+    async deletePageDataAction({ dispatch }, payload: any) {
+      // 1|获取pagename和id
+      const { pageName, id } = payload
+      const pageUrl = `/${pageName}/${id}`
+      // 2、调用删除网络请求
+      await deletaPageData(pageUrl)
+      // 3、重新请求最新数据->pagecontent.vue
+      dispatch('getPageListAction', {
+        pageName,
+        queryInfo: {
+          offset: 0,
+          size: 20
+        }
+      })
     }
   }
 }

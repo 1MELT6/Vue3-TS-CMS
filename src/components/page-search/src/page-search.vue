@@ -26,7 +26,7 @@
 <script lang="ts">
 import HyForm from '@/base-ui/form'
 
-import { defineComponent, ref } from 'vue'
+import { defineComponent, nextTick, ref } from 'vue'
 export default defineComponent({
   props: {
     searchFormConfig: {
@@ -65,8 +65,17 @@ export default defineComponent({
       // }
       formData.value = formOriginData
       emit('resetBtnClick')
+      // bugfix副作用
+      nextTick(function handleQueryClick() {
+        emit('queryBtnClick', formData.value)
+      })
     }
     // 3、用户搜索
+    // bugfix副作用
+
+    nextTick(function handleQueryClick() {
+      emit('queryBtnClick', formData.value)
+    })
     const handleQueryClick = () => {
       emit('queryBtnClick', formData.value)
     }
