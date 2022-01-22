@@ -9,7 +9,14 @@
       ref="pageContentRef"
       :contentTableConfig="contentTableConfig"
       pageName="user"
+      @newBtnClick="hanldeNewData"
+      @editBtnClick="hanldeEditData"
     />
+    <page-modal
+      :defaultInfo="defaultInfo"
+      ref="pageModalRef"
+      :modalConfig="modalConfig"
+    ></page-modal>
   </div>
 </template>
 
@@ -18,14 +25,20 @@ import { defineComponent, ref } from 'vue'
 
 import PageContent from '@/components/page-content/src/page-content.vue'
 import pageSearch from '@/components/page-search/src/page-search.vue'
+import pageModal from '@/components/page-modal/src/page-modal.vue'
 
 import { searchFormConfig } from './config/search.config'
 import { contentTableConfig } from './config/content.config'
+import { modalConfig } from './config/modal.config'
+import PageModal from '../../../components/page-modal/src/page-modal.vue'
+
 export default defineComponent({
   name: 'user',
-  components: { pageSearch, PageContent },
+  components: { pageSearch, PageContent, pageModal, PageModal },
   setup() {
     const pageContentRef = ref<InstanceType<typeof PageContent>>()
+    const pageModalRef = ref<InstanceType<typeof PageModal>>()
+    const defaultInfo = ref({})
     const handleResetClick = () => {
       pageContentRef.value?.getPageData()
     }
@@ -33,12 +46,30 @@ export default defineComponent({
       pageContentRef.value?.getPageData(queryInfo)
       console.log(queryInfo)
     }
+    const hanldeNewData = () => {
+      if (pageModalRef.value) {
+        pageModalRef.value.dialogVisible = true
+      }
+    }
+    const hanldeEditData = (item: any) => {
+      // 保存编辑值
+      defaultInfo.value = { ...item }
+      if (pageModalRef.value) {
+        pageModalRef.value.dialogVisible = true
+      }
+    }
+
     return {
       contentTableConfig,
       searchFormConfig,
       handleResetClick,
       handleQueryClick,
-      pageContentRef
+      pageContentRef,
+      modalConfig,
+      hanldeNewData,
+      hanldeEditData,
+      pageModalRef,
+      defaultInfo
     }
   }
 })

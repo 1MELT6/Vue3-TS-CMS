@@ -7,7 +7,7 @@
       v-model:page="pageInfo"
     >
       <template #headerHandler>
-        <el-button type="primary">新增用户</el-button>
+        <el-button type="primary" @click="handleNewClick">新增用户</el-button>
         <el-button icon="el-icon-refresh">刷新</el-button>
       </template>
       <!-- 动态改变样式，具名插槽 -->
@@ -23,7 +23,9 @@
       <!-- scope作用域插槽 -->
       <template #handler="scope">
         <div class="handle-btns">
-          <el-button icon="el-icon-edit" type="text">编辑</el-button>
+          <el-button icon="el-icon-edit" type="text" @click="handleEditClick"
+            >编辑</el-button
+          >
           <el-button
             icon="el-icon-delete"
             type="text"
@@ -53,7 +55,8 @@ export default defineComponent({
       required: true
     }
   },
-  setup(props) {
+  emits: ['newBtnClick', 'editBtnClick'],
+  setup(props, { emit }) {
     // 页数双向绑定
     const pageInfo = ref({ currentPage: 0, pageSize: 10 })
     watch(pageInfo, () => getPageData)
@@ -89,12 +92,22 @@ export default defineComponent({
         id: item.id
       })
     }
+
+    const handleNewClick = () => {
+      emit('newBtnClick')
+    }
+    const handleEditClick = (item: any) => {
+      emit('editBtnClick', item)
+    }
+
     return {
       dataList,
       getPageData,
       dataCount,
       pageInfo,
-      handleDeleteClick
+      handleDeleteClick,
+      handleEditClick,
+      handleNewClick
     }
   }
 })
