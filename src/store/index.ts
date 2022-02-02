@@ -7,6 +7,7 @@ import user from './main/user/user'
 // }
 import login from './login/login'
 import { IRootState, IStoreType } from './types'
+import dashboard from './main/analysis/dashboard'
 const store = createStore<IRootState>({
   state() {
     return {
@@ -16,7 +17,8 @@ const store = createStore<IRootState>({
   },
   modules: {
     login,
-    user
+    user,
+    dashboard
   }
 })
 export function useStore(): Store<IStoreType> {

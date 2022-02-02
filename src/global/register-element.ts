@@ -34,7 +34,8 @@ import {
   ElTable,
   ElTableColumn,
   ElPagination,
-  ElDialog
+  ElDialog,
+  ElCard
 } from 'element-plus'
 
 const components = [
@@ -72,7 +73,8 @@ const components = [
   ElTable,
   ElTableColumn,
   ElPagination,
-  ElDialog
+  ElDialog,
+  ElCard
   // Document
 ]
 

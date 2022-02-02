@@ -45,7 +45,7 @@ export default defineComponent({
     }
     const handleQueryClick = (queryInfo: any) => {
       pageContentRef.value?.getPageData(queryInfo)
-      console.log(queryInfo)
+      // console.log(queryInfo)
     }
     const hanldeNewData = () => {
       defaultInfo.value = {}
