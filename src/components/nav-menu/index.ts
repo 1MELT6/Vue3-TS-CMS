@@ -35,15 +35,14 @@ export const list = [
         type: 2,
         url: '/main/user',
         icon: 'el-icon-document-copy'
+      },
+      {
+        name: '评论管理',
+        id: '2-2',
+        type: 2,
+        url: '/main/comment',
+        icon: 'el-icon-document-copy'
       }
-      // },
-      // {
-      //   name: '账号专栏',
-      //   id: '2-2',
-      //   type: 2,
-      //   url: '/main/user',
-      //   icon: 'el-icon-document-copy'
-      // }
     ]
   },
   {
@@ -60,10 +59,10 @@ export const list = [
         icon: 'el-icon-document-copy'
       },
       {
-        name: '食材管理',
+        name: '标签管理',
         id: '3-2',
         type: 2,
-        url: '/main/center/food',
+        url: '/main/center/label',
         icon: 'el-icon-document-copy'
       }
     ]

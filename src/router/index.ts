@@ -47,11 +47,11 @@ const routes: RouteRecordRaw[] = [
         }
       },
       {
-        path: 'center/food',
-        name: 'food',
-        component: () => import('@/views/main/center/food/food.vue'),
+        path: 'center/label',
+        name: 'label',
+        component: () => import('@/views/main/center/label/label.vue'),
         meta: {
-          title: '食材管理',
+          title: '标签管理',
           showInbreadcrumb: true
         }
       },
@@ -70,6 +70,15 @@ const routes: RouteRecordRaw[] = [
         component: () => import('@/views/main/user/user.vue'),
         meta: {
           title: '用户管理',
+          showInbreadcrumb: true
+        }
+      },
+      {
+        path: 'user/comment',
+        name: 'comment',
+        component: () => import('@/views/main/comment/comment.vue'),
+        meta: {
+          title: '评论管理',
           showInbreadcrumb: true
         }
       }
