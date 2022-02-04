@@ -14,7 +14,13 @@ const userModule: Module<IuserState, IRootState> = {
       userList: [],
       userCount: 0,
       recipeList: [],
-      recipeCount: 0
+      recipeCount: 0,
+      labelList: [],
+      labelCount: 0,
+      commentList: [],
+      commentCount: 0,
+      nutritionList: [],
+      nutritionCount: 0
     }
   },
   mutations: {
@@ -25,11 +31,30 @@ const userModule: Module<IuserState, IRootState> = {
     changeUserCount(state, userCount: number) {
       state.userCount = userCount
     },
-    changeRecipeList(state, recipeList: any[]) {
-      state.recipeList = recipeList
+    changeRecipeList(state, list: any[]) {
+      state.recipeList = list
     },
-    changeRecipeCount(state, recipeCount: number) {
-      state.recipeCount = recipeCount
+    changeRecipeCount(state, count: number) {
+      state.recipeCount = count
+    },
+    changeLabelList(state, list: any[]) {
+      state.labelList = list
+    },
+    changeLabelCount(state, count: number) {
+      state.labelCount = count
+    },
+
+    changeNutritionList(state, list: any[]) {
+      state.nutritionList = list
+    },
+    changeNutritionCount(state, count: number) {
+      state.nutritionCount = count
+    },
+    changeCommentList(state, list: any[]) {
+      state.commentList = list
+    },
+    changeCommentCount(state, count: number) {
+      state.commentCount = count
     }
   },
   getters: {

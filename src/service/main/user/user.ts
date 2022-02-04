@@ -1,7 +1,7 @@
 import hyRequest from '../../index'
 
 export function getUserListData(url: string, queryInfo: any) {
-  console.log(queryInfo)
+  console.log(queryInfo + '----------------')
 
   return hyRequest.post({
     url: url,

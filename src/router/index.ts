@@ -65,6 +65,15 @@ const routes: RouteRecordRaw[] = [
         }
       },
       {
+        path: 'center/nutrition',
+        name: 'nutrition',
+        component: () => import('@/views/main/center/nutrition/nutrition.vue'),
+        meta: {
+          title: '营养管理',
+          showInbreadcrumb: true
+        }
+      },
+      {
         path: 'user',
         name: 'user',
         component: () => import('@/views/main/user/user.vue'),
@@ -74,7 +83,7 @@ const routes: RouteRecordRaw[] = [
         }
       },
       {
-        path: 'user/comment',
+        path: 'comment',
         name: 'comment',
         component: () => import('@/views/main/comment/comment.vue'),
         meta: {

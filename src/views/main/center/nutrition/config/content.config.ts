@@ -4,26 +4,25 @@ export const contentTableConfig = {
   propList: [
     { prop: 'name', label: '菜谱', minwidth: '100' },
     {
-      prop: 'description',
-      label: '描述',
-      minwidth: '150'
+      prop: 'protein',
+      label: '蛋白质',
+      minwidth: '100'
     },
     {
-      prop: 'pre_time',
-      label: '准备时间',
-      minwidth: '50'
+      prop: 'fat',
+      label: '脂肪',
+      minwidth: '100'
     },
     {
-      prop: 'work_time',
-      label: '烹饪时间',
-      minwidth: '50'
+      prop: 'carbohydrates',
+      label: '碳水化合物',
+      minwidth: '100'
     },
     {
-      prop: 'full_time',
-      label: '总时间',
-      minwidth: '50'
+      prop: 'calories',
+      label: '卡路里',
+      minwidth: '100'
     },
-
     { prop: 'createAt', label: '创建时间', minwidth: '250' },
     { prop: 'updateAt', label: '更新时间', minwidth: '250' },
     { label: '操作', midwidth: 120, slotName: 'handler' }

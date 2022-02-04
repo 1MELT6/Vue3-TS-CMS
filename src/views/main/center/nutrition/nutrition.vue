@@ -1,7 +1,10 @@
 <template>
   <div class="comment">
     <page-search :searchFormConfig="searchFormConfig"></page-search>
-    <page-content :contentTableConfig="contentTableConfig" pageName="comment" />
+    <page-content
+      :contentTableConfig="contentTableConfig"
+      pageName="nutrition"
+    />
   </div>
 </template>
 <script lang="ts">

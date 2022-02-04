@@ -64,6 +64,13 @@ export const list = [
         type: 2,
         url: '/main/center/label',
         icon: 'el-icon-document-copy'
+      },
+      {
+        name: '营养管理',
+        id: '3-3',
+        type: 2,
+        url: '/main/center/nutrition',
+        icon: 'el-icon-document-copy'
       }
     ]
   }
