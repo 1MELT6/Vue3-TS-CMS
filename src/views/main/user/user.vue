@@ -26,16 +26,15 @@ import { defineComponent, ref } from 'vue'
 
 import PageContent from '@/components/page-content/src/page-content.vue'
 import pageSearch from '@/components/page-search/src/page-search.vue'
-import pageModal from '@/components/page-modal/src/page-modal.vue'
+import PageModal from '@/components/page-modal/src/page-modal.vue'
 
 import { searchFormConfig } from './config/search.config'
 import { contentTableConfig } from './config/content.config'
 import { modalConfig } from './config/modal.config'
-import PageModal from '../../../components/page-modal/src/page-modal.vue'
 
 export default defineComponent({
   name: 'user',
-  components: { pageSearch, PageContent, pageModal, PageModal },
+  components: { pageSearch, PageContent, PageModal },
   setup() {
     const pageContentRef = ref<InstanceType<typeof PageContent>>()
     const pageModalRef = ref<InstanceType<typeof PageModal>>()
