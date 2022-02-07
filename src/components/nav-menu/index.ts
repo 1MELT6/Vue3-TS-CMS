@@ -71,6 +71,13 @@ export const list = [
         type: 2,
         url: '/main/center/nutrition',
         icon: 'el-icon-document-copy'
+      },
+      {
+        name: '时间管理',
+        id: '3-4',
+        type: 2,
+        url: '/main/center/time',
+        icon: 'el-icon-document-copy'
       }
     ]
   }

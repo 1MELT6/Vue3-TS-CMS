@@ -12,14 +12,15 @@
       </template>
       <!-- 动态改变样式，具名插槽 -->
       <template #password="scope">
-        <strong>{{ scope.row.password }}</strong>
-      </template>
-      <template #updateAt="scope">
-        <strong>{{ $filters.formatTime(scope.row.updateAt) }}</strong>
+        {{ scope.row.password }}
       </template>
       <template #createAt="scope">
-        <strong>{{ $filters.formatTime(scope.row.createAt) }}</strong>
+        <span>{{ $filters.formatTime(scope.row.createAt) }}</span>
       </template>
+      <template #updateAt="scope">
+        <span>{{ $filters.formatTime(scope.row.updateAt) }}</span>
+      </template>
+
       <!-- scope作用域插槽 -->
       <template #handler="scope">
         <div class="handle-btns">
@@ -38,7 +39,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, computed, ref, watch } from 'vue'
+import { defineComponent, computed, ref, watch, nextTick } from 'vue'
 import { useStore } from 'vuex'
 import CTable from '@/base-ui/table'
 export default defineComponent({
@@ -58,8 +59,11 @@ export default defineComponent({
   emits: ['newBtnClick', 'editBtnClick'],
   setup(props, { emit }) {
     // 页数双向绑定
-    const pageInfo = ref({ currentPage: 0, pageSize: 10 })
-    watch(pageInfo, () => getPageData)
+    const pageInfo = ref({ currentPage: 1, pageSize: 10 })
+    //页数选择时重新监听调用
+    watch(pageInfo, () => {
+      getPageData()
+    })
     // 2、拿到usestore请求数据
 
     const store = useStore()
@@ -70,12 +74,15 @@ export default defineComponent({
       store.dispatch('user/getUserListAction', {
         pageName: props.pageName,
         queryInfo: {
-          offset: pageInfo.value.currentPage * pageInfo.value.pageSize,
+          offset: (pageInfo.value.currentPage - 1) * pageInfo.value.pageSize,
           size: pageInfo.value.pageSize,
           ...queryInfo
         }
       })
     }
+    // nextTick(function what(){
+
+    // })
     getPageData()
     // 随着更新重新计算
     const dataList = computed(() =>

@@ -14,6 +14,16 @@ export const searchFormConfig: IForm = {
       type: 'input',
       label: '名称',
       placeholder: '请输入用户名'
+    },
+    {
+      field: 'createTime',
+      type: 'datepicker',
+      label: '创建时间',
+      otherOptions: {
+        startPlaceholder: '开始时间',
+        endPlaceholder: '结束时间',
+        type: 'daterange'
+      }
     }
   ]
 }

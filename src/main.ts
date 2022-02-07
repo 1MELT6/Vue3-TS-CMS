@@ -11,6 +11,7 @@ import store from './store'
 
 const app = createApp(App)
 globalRegister(app)
+// console.log(app.config.globalProperties.$filters)
 
 interface DataType {
   data: any

@@ -34,15 +34,15 @@
       </template>
     </el-table>
     <div class="footer">
-      <slot name="footer"
-        ><el-pagination
-          :page-sizes="page.pageSize"
-          :page-size="[10, 20, 30]"
-          layout="total, sizes, prev, pager, next, jumper"
-          :total="listCount"
-          :current-page="page.currentPage"
+      <slot name="footer">
+        <el-pagination
           @size-change="handleSizeChange"
           @current-change="handleCurrentChange"
+          :current-page="page.currentPage"
+          :page-size="page.pageSize"
+          :page-sizes="[5, 10, 20, 30]"
+          layout="total, sizes, prev, pager, next, jumper"
+          :total="listCount"
         >
         </el-pagination
       ></slot>
@@ -66,8 +66,8 @@ export default defineComponent({
       required: true
     },
     listCount: {
-      type: Array,
-      required: true
+      type: Number,
+      default: 0
     },
     showIndexColumn: {
       type: Boolean,

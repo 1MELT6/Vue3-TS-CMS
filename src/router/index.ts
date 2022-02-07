@@ -74,6 +74,15 @@ const routes: RouteRecordRaw[] = [
         }
       },
       {
+        path: 'center/time',
+        name: 'time',
+        component: () => import('@/views/main/center/time/time.vue'),
+        meta: {
+          title: '营养管理',
+          showInbreadcrumb: true
+        }
+      },
+      {
         path: 'user',
         name: 'user',
         component: () => import('@/views/main/user/user.vue'),

@@ -8,7 +8,7 @@
     <page-content
       ref="pageContentRef"
       :contentTableConfig="contentTableConfig"
-      pageName="comment"
+      pageName="time"
       @newBtnClick="hanldeNewData"
       @editBtnClick="hanldeEditData"
     />
@@ -16,7 +16,7 @@
       :defaultInfo="defaultInfo"
       ref="pageModalRef"
       :modalConfig="modalConfig"
-      pageName="comment"
+      pageName="time"
     ></page-modal>
   </div>
 </template>

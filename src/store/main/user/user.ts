@@ -20,7 +20,9 @@ const userModule: Module<IuserState, IRootState> = {
       commentList: [],
       commentCount: 0,
       nutritionList: [],
-      nutritionCount: 0
+      nutritionCount: 0,
+      timeList: [],
+      timeCount: 0
     }
   },
   mutations: {
@@ -55,6 +57,12 @@ const userModule: Module<IuserState, IRootState> = {
     },
     changeCommentCount(state, count: number) {
       state.commentCount = count
+    },
+    changeTimeList(state, list: any[]) {
+      state.timeList = list
+    },
+    changeTimeCount(state, count: number) {
+      state.timeCount = count
     }
   },
   getters: {
@@ -64,8 +72,8 @@ const userModule: Module<IuserState, IRootState> = {
       }
     },
     pageListCount(state) {
-      return (pageNumber: string) => {
-        return (state as any)[`${pageNumber}Count`]
+      return (pageName: string) => {
+        return (state as any)[`${pageName}Count`]
       }
     }
   },

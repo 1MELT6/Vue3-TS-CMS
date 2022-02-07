@@ -9,4 +9,6 @@ export interface IuserState {
   commentCount: number
   nutritionList: any[]
   nutritionCount: number
+  timeList: any[]
+  timeCount: number
 }

@@ -12,31 +12,26 @@ export const searchFormConfig: IForm = {
     {
       field: 'name',
       type: 'input',
-      label: '用户名称',
+      label: '名称',
       placeholder: '请输入用户名'
     },
     {
-      field: 'rec_name',
+      field: 'pre_time',
       type: 'input',
-      label: '菜谱名称',
-      placeholder: '请输入菜谱名称'
-    },
-    {
-      field: 'content',
-      type: 'input',
-      label: '评论内容',
+      label: '准备时间',
       placeholder: '请输入关键字描述'
     },
-
     {
-      field: 'createAt',
-      type: 'datepicker',
-      label: '创建时间',
-      otherOptions: {
-        startPlaceholder: '开始时间',
-        endPlaceholder: '结束时间',
-        type: 'daterange'
-      }
+      field: 'work_time',
+      type: 'input',
+      label: '工作时间',
+      placeholder: '请输入关键字描述'
+    },
+    {
+      field: 'full_time',
+      type: 'input',
+      label: '总时间',
+      placeholder: '请输入关键字描述'
     }
   ]
 }

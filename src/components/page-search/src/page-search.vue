@@ -66,16 +66,16 @@ export default defineComponent({
       formData.value = formOriginData
       emit('resetBtnClick')
       // bugfix副作用
-      nextTick(function handleQueryClick() {
-        emit('queryBtnClick', formData.value)
-      })
+      // nextTick(function handleQueryClick() {
+      //   emit('queryBtnClick', formData.value)
+      // })
     }
     // 3、用户搜索
     // bugfix副作用
 
-    nextTick(function handleQueryClick() {
-      emit('queryBtnClick', formData.value)
-    })
+    // nextTick(function handleQueryClick() {
+    //   emit('queryBtnClick', formData.value)
+    // })
     const handleQueryClick = () => {
       emit('queryBtnClick', formData.value)
     }

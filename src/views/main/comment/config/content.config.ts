@@ -9,8 +9,12 @@ export const contentTableConfig = {
       minwidth: '100'
     },
     { prop: 'content', label: '评论内容', minwidth: '100' },
-
-    { prop: 'createAt', label: '创建时间', minwidth: '250' },
+    {
+      prop: 'createAt',
+      label: '创建时间',
+      minwidth: '250',
+      slotName: 'createAt'
+    },
     { label: '操作', midwidth: 120, slotName: 'handler' }
   ],
 
