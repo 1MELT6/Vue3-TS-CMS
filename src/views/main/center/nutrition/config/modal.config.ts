@@ -19,7 +19,7 @@ export const modalConfig = {
       placeholder: '请输入菜谱名称'
     },
     {
-      field: '碳水化合物',
+      field: 'carbohydrates',
       type: 'input',
       label: '碳水化合物',
       placeholder: '请输入菜谱名称'

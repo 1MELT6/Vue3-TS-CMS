@@ -7,8 +7,7 @@
       v-model:page="pageInfo"
     >
       <template #headerHandler>
-        <el-button type="primary" @click="handleNewClick">新增用户</el-button>
-        <el-button icon="el-icon-refresh">刷新</el-button>
+        <el-button type="primary" @click="handleNewClick">新增</el-button>
       </template>
       <!-- 动态改变样式，具名插槽 -->
       <template #password="scope">
@@ -24,7 +23,10 @@
       <!-- scope作用域插槽 -->
       <template #handler="scope">
         <div class="handle-btns">
-          <el-button icon="el-icon-edit" type="text" @click="handleEditClick"
+          <el-button
+            icon="el-icon-edit"
+            type="text"
+            @click="handleEditClick(scope.row)"
             >编辑</el-button
           >
           <el-button
@@ -58,18 +60,17 @@ export default defineComponent({
   },
   emits: ['newBtnClick', 'editBtnClick'],
   setup(props, { emit }) {
-    // 页数双向绑定
-    const pageInfo = ref({ currentPage: 1, pageSize: 10 })
-    //页数选择时重新监听调用
-    watch(pageInfo, () => {
-      getPageData()
-    })
     // 2、拿到usestore请求数据
 
     const store = useStore()
-
+    // 页数双向绑定
+    const pageInfo = ref({ currentPage: 1, pageSize: 10 })
+    //页数选择时重新监听调用bugggggggggggggg
+    watch(pageInfo, () => {
+      getPageData()
+    })
     const getPageData = (queryInfo: any = {}) => {
-      console.log(queryInfo)
+      // console.log(queryInfo)
 
       store.dispatch('user/getUserListAction', {
         pageName: props.pageName,

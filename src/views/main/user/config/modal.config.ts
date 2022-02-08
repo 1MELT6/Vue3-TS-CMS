@@ -13,6 +13,6 @@ export const modalConfig = {
       placeholder: '请输入用户名'
     }
   ],
-  colLayout: { span: 24 },
-  itemStyle: {}
+  colLayout: { span: 24 }
+  // itemStyle: {}
 }

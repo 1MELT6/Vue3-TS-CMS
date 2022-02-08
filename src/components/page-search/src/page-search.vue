@@ -2,7 +2,7 @@
   <div class="page-search">
     <hy-form v-bind="searchFormConfig" v-model="formData">
       <template #header>
-        <h1 class="header">高级检索</h1>
+        <h1 class="header">数据检索</h1>
       </template>
       <template #footer>
         <div class="handle-btns">
@@ -89,7 +89,7 @@ export default defineComponent({
 </script>
 <style scoped>
 .header {
-  color: red;
+  color: rgb(0, 102, 255);
 }
 .handle-btns {
   text-align: right;

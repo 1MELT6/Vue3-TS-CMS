@@ -6,7 +6,7 @@
       @click="handleFoldClick"
     ></i>
     <div class="content">
-      <!-- <breadcrumb :breadcrumbs="breadcrumbs" /> -->
+      <breadcrumb :breadcrumbs="breadcrumbs" />
       <div>
         <el-dropdown>
           <span class="el-dropdown-link">
@@ -33,13 +33,13 @@
 import { defineComponent, ref, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import localCache from '@/utils/cache'
-// import Breadcrumb, { IBreadcrumb } from '@/base-ui/breadcrumb'
+import Breadcrumb, { IBreadcrumb } from '@/base-ui/breadcrumb'
 import { pathMapBreadcrumbs } from '@/utils/map-menus'
 import { list } from '../../nav-menu/index'
 
 export default defineComponent({
   components: {
-    // Breadcrumb
+    Breadcrumb
   },
   emits: ['foldChange'],
   setup(props, { emit }) {

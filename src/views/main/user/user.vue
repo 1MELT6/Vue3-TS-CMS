@@ -36,6 +36,9 @@ export default defineComponent({
   name: 'user',
   components: { pageSearch, PageContent, PageModal },
   setup() {
+    // const [pageContentRef, handleResetClick, handleQueryClick] = usePageSearch()
+    // const [pageModalRef, defaultInfo, hanldeNewData, hanldeEditData] =
+    // usePageModal()
     const pageContentRef = ref<InstanceType<typeof PageContent>>()
     const pageModalRef = ref<InstanceType<typeof PageModal>>()
     const defaultInfo = ref({})

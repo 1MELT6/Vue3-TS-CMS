@@ -8,7 +8,12 @@
         </div>
       </slot>
     </div>
-    <el-table :data="listData" border style="width: 100%">
+    <el-table
+      :data="listData"
+      border
+      style="width: 100%"
+      @selection-change="selectionChange"
+    >
       <el-table-column
         v-if="showSelectColumn"
         type="selection"
@@ -50,20 +55,20 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, PropType } from 'vue'
 export default defineComponent({
   props: {
     title: {
       type: String,
-      default: ''
+      default: '列表详情'
     },
     propList: {
-      type: Array,
-      required: true
+      type: Array as PropType<any[]>,
+      default: () => []
     },
     listData: {
-      type: Array,
-      required: true
+      type: Array as PropType<any[]>,
+      default: () => []
     },
     listCount: {
       type: Number,
@@ -71,7 +76,7 @@ export default defineComponent({
     },
     showIndexColumn: {
       type: Boolean,
-      default: false
+      default: true
     },
     showSelectColumn: {
       type: Boolean,
@@ -84,17 +89,19 @@ export default defineComponent({
   },
   emits: ['selectionChange', 'update:page'],
   setup(props, { emit }) {
-    const handleSelectionChange = (value: any) => {
+    const selectionChange = (value: any) => {
       emit('selectionChange', value)
     }
     const handleCurrentChange = (currentPage: number) => {
+      console.log('okkkkkkkk')
       emit('update:page', { ...props.page, currentPage })
     }
     const handleSizeChange = (pageSize: number) => {
+      console.log('okkksssssssskkkkk')
       emit('update:page', { ...props.page, pageSize })
     }
     return {
-      handleSelectionChange,
+      selectionChange,
       handleCurrentChange,
       handleSizeChange
     }
