@@ -33,7 +33,7 @@ import { contentTableConfig } from './config/content.config'
 import { modalConfig } from './config/modal.config'
 
 export default defineComponent({
-  name: 'user',
+  name: 'recipe',
   components: { pageSearch, PageContent, PageModal },
   setup() {
     const pageContentRef = ref<InstanceType<typeof PageContent>>()

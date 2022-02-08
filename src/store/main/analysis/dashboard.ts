@@ -44,13 +44,13 @@ const dashboardModule: Module<IDashboardState, IRootState> = {
   actions: {
     async getDashboardDataAction({ commit }) {
       const categoryCountResult = await getCategoryRecipesCount()
-      console.log(categoryCountResult)
+      // console.log(categoryCountResult)
       commit('changeCategoryRecipesCount', categoryCountResult)
       const usersDayCount = await getUsersDayCount()
-      console.log(usersDayCount)
+      // console.log(usersDayCount)
       commit('changeUsersDayCount', usersDayCount)
       const usersCount = await getUsersCount()
-      console.log(usersCount)
+      // console.log(usersCount)
       commit('changeUsersCount', usersCount)
       const recipesCount = await getRecipesCount()
       commit('changeRecipesCount', recipesCount)

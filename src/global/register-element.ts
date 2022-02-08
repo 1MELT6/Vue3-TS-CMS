@@ -35,7 +35,11 @@ import {
   ElTableColumn,
   ElPagination,
   ElDialog,
-  ElCard
+  ElCard,
+  ElDescriptions,
+  ElTimeline,
+  ElTag,
+  ElTooltip
 } from 'element-plus'
 
 const components = [
@@ -74,7 +78,12 @@ const components = [
   ElTableColumn,
   ElPagination,
   ElDialog,
-  ElCard
+  ElCard,
+  ElDescriptions,
+  ElDropdownItem,
+  ElTag,
+  ElTooltip
+
   // Document
 ]
 

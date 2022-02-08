@@ -87,15 +87,6 @@ const userModule: Module<IuserState, IRootState> = {
       // const pageUrl = ${pageName}/list
       const pageUrl = `/${pageName}/list`
 
-      // let pageUrl = ''
-      // switch (pageName) {
-      //   case 'user':
-      //     pageUrl = '/user/list'
-      //     break
-      //   case 'recipe':
-      //     pageUrl = '/recipe/list'
-      //     break
-      // }
       // 1、对页面发送真真请求->进入service->userts
       const pageResult = await getUserListData(pageUrl, payload.queryInfo)
       // 2、获得数据并存储state
@@ -107,23 +98,6 @@ const userModule: Module<IuserState, IRootState> = {
         pageName.slice(0, 1).toUpperCase() + pageName.slice(1)
       commit(`change${changePageName}List`, pageResult)
       commit(`change${changePageName}Count`, totalCount)
-
-      // 方法二：选择
-      // switch (pageName) {
-      //   case 'user':
-      //     console.log('okkkkkkkkkkkkusercommittttttt')
-
-      //     commit('changeUserList', pageResult)
-      //     commit('changeUserCount', totalCount)
-      //     break
-      //   case 'recipe':
-      //     commit('changeUserList', pageResult)
-      //     commit('changeUserCount', totalCount)
-      //     break
-      // }
-      // 方法一：固定
-      // commit('changeUserList', pageResult)
-      // commit('changeUserCount', totalCount)
     },
 
     async deletePageDataAction({ dispatch }, payload: any) {
@@ -144,7 +118,7 @@ const userModule: Module<IuserState, IRootState> = {
     async createPageDataAction({ dispatch }, payload: any) {
       // 创建数据的请求
       const { pageName, newData } = payload
-      const pageUrl = `/${pageName}`
+      const pageUrl = `/${payload.pageName}`
       await createPageData(pageUrl, newData)
       // 请求最新数据
       dispatch('getPageListAction', {
@@ -158,6 +132,8 @@ const userModule: Module<IuserState, IRootState> = {
     async editPageDataAction({ dispatch }, payload: any) {
       // 编辑数据的请求
       const { pageName, editData, id } = payload
+      console.log(editData)
+
       const pageUrl = `/${pageName}/${id}`
       await editPageData(pageUrl, editData)
       // 请求最新数据

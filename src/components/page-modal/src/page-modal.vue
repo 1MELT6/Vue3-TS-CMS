@@ -60,6 +60,8 @@ export default defineComponent({
       dialogVisible.value = false
       if (Object.keys(props.defaultInfo).length) {
         // 编辑
+        console.log(props.defaultInfo)
+
         store.dispatch('user/editPageDataAction', {
           pageName: props.pageName,
           editData: { ...formData.value },
