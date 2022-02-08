@@ -32,36 +32,27 @@ import { searchFormConfig } from './config/search.config'
 import { contentTableConfig } from './config/content.config'
 import { modalConfig } from './config/modal.config'
 
+import { usePageModal } from '@/hooks/use-page-modal'
+import { usePageSearch } from '@/hooks/use-page-search'
 export default defineComponent({
   name: 'user',
   components: { pageSearch, PageContent, PageModal },
   setup() {
-    // const [pageContentRef, handleResetClick, handleQueryClick] = usePageSearch()
-    // const [pageModalRef, defaultInfo, hanldeNewData, hanldeEditData] =
-    // usePageModal()
-    const pageContentRef = ref<InstanceType<typeof PageContent>>()
-    const pageModalRef = ref<InstanceType<typeof PageModal>>()
-    const defaultInfo = ref({})
-    const handleResetClick = () => {
-      pageContentRef.value?.getPageData()
+    const newCallback = () => {
+      const passwordItem = modalConfig.formItems.find(
+        (item) => item.field === 'password'
+      )
+      passwordItem!.isHidden = false
     }
-    const handleQueryClick = (queryInfo: any) => {
-      pageContentRef.value?.getPageData(queryInfo)
-      // console.log(queryInfo)
+    const editCallback = () => {
+      const passwordItem = modalConfig.formItems.find(
+        (item) => item.field === 'password'
+      )
+      passwordItem!.isHidden = true
     }
-    const hanldeNewData = () => {
-      defaultInfo.value = {}
-      if (pageModalRef.value) {
-        pageModalRef.value.dialogVisible = true
-      }
-    }
-    const hanldeEditData = (item: any) => {
-      // 保存编辑值
-      defaultInfo.value = { ...item }
-      if (pageModalRef.value) {
-        pageModalRef.value.dialogVisible = true
-      }
-    }
+    const [pageContentRef, handleResetClick, handleQueryClick] = usePageSearch()
+    const [pageModalRef, defaultInfo, hanldeNewData, hanldeEditData] =
+      usePageModal(newCallback, editCallback)
 
     return {
       contentTableConfig,

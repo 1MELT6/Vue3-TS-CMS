@@ -1,7 +1,9 @@
 import PageModal from '@/components/page-modal'
 import { ref } from 'vue'
 
-export function usePageModal() {
+type CallbackFn = () => void
+
+export function usePageModal(newCb: CallbackFn, editCb: CallbackFn) {
   const pageModalRef = ref<InstanceType<typeof PageModal>>()
   const defaultInfo = ref({})
 
@@ -10,6 +12,7 @@ export function usePageModal() {
     if (pageModalRef.value) {
       pageModalRef.value.dialogVisible = true
     }
+    newCb && newCb()
   }
   const hanldeEditData = (item: any) => {
     // 保存编辑值
@@ -17,6 +20,8 @@ export function usePageModal() {
     if (pageModalRef.value) {
       pageModalRef.value.dialogVisible = true
     }
+    // 显示隐藏item在新建显示编辑隐藏等
+    editCb && editCb()
   }
   return [pageModalRef, defaultInfo, hanldeNewData, hanldeEditData]
 }
