@@ -52,6 +52,8 @@ export default defineComponent({
     const breadcrumbs = computed(() => {
       const route = useRoute()
       const currentPath = route.path
+      // console.log(list)
+
       return pathMapBreadcrumbs(list, currentPath)
     })
 

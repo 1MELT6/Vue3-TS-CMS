@@ -12,7 +12,7 @@
       :data="listData"
       border
       style="width: 100%"
-      @selection-change="selectionChange"
+      @selection-change="handleselectionChange"
     >
       <el-table-column
         v-if="showSelectColumn"
@@ -89,7 +89,7 @@ export default defineComponent({
   },
   emits: ['selectionChange', 'update:page'],
   setup(props, { emit }) {
-    const selectionChange = (value: any) => {
+    const handleselectionChange = (value: any) => {
       emit('selectionChange', value)
     }
     const handleCurrentChange = (currentPage: number) => {
@@ -101,7 +101,7 @@ export default defineComponent({
       emit('update:page', { ...props.page, pageSize })
     }
     return {
-      selectionChange,
+      handleselectionChange,
       handleCurrentChange,
       handleSizeChange
     }

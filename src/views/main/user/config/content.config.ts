@@ -3,12 +3,7 @@ export const contentTableConfig = {
 
   propList: [
     { prop: 'name', label: '账号名', minwidth: '100' },
-    {
-      prop: 'password',
-      label: '密码',
-      minwidth: '100',
-      slotName: 'password'
-    },
+
     {
       prop: 'createAt',
       label: '创建时间',

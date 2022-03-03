@@ -90,8 +90,12 @@ const userModule: Module<IuserState, IRootState> = {
       // 1、对页面发送真真请求->进入service->userts
       const pageResult = await getUserListData(pageUrl, payload.queryInfo)
       // 2、获得数据并存储state
-      console.log(payload.queryInfo)
-      const totalCount = pageResult.length
+      // console.log(pageResult[0].totalCount)
+      // const suzu1 = Object.keys(pageResult).forEach(function (key) {
+      //   console.log(key, pageResult[key])
+      // })
+      const hay = Object.values(pageResult[1])
+      const totalCount = hay[0]
 
       // 方法三：es6语法
       const changePageName =
@@ -107,7 +111,7 @@ const userModule: Module<IuserState, IRootState> = {
       // 2、调用删除网络请求
       await deletaPageData(pageUrl)
       // 3、重新请求最新数据->pagecontent.vue
-      dispatch('getPageListAction', {
+      dispatch('getUserListAction', {
         pageName,
         queryInfo: {
           offset: 0,
@@ -121,7 +125,7 @@ const userModule: Module<IuserState, IRootState> = {
       const pageUrl = `/${payload.pageName}`
       await createPageData(pageUrl, newData)
       // 请求最新数据
-      dispatch('getPageListAction', {
+      dispatch('getUserListAction', {
         pageName,
         queryInfo: {
           offset: 0,
@@ -137,7 +141,7 @@ const userModule: Module<IuserState, IRootState> = {
       const pageUrl = `/${pageName}/${id}`
       await editPageData(pageUrl, editData)
       // 请求最新数据
-      dispatch('getPageListAction', {
+      dispatch('getUserListAction', {
         pageName,
         queryInfo: {
           offset: 0,

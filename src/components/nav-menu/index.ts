@@ -6,6 +6,7 @@ export const list = [
     id: '1',
     type: 1,
     icon: 'el-icon-monitor',
+    url: '/main/analysis',
     children: [
       {
         name: '技术总览',
@@ -28,6 +29,7 @@ export const list = [
     id: '2',
     type: 1,
     icon: 'el-icon-setting',
+    url: '/main',
     children: [
       {
         name: '用户管理',
@@ -50,6 +52,7 @@ export const list = [
     id: '3',
     type: 1,
     icon: 'el-icon-edit',
+    url: '/main/center',
     children: [
       {
         name: '食谱管理',

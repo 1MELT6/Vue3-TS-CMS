@@ -7,23 +7,24 @@ export function pathMapBreadcrumbs(list: any[], currentPath: string) {
   const breadcrumbs: IBreadcrumb[] = []
 
   for (const menu of list) {
+    // console.log(menu)
     // console.log(menu.children)
 
     if (menu.type === 1) {
       const findMenu = pathMapToMenu(menu.children ?? [], currentPath)
       // console.log(findMenu)
+      // console.log(menu)
 
       if (findMenu) {
-        breadcrumbs.push({ name: menu.name, path: menu.url })
-        breadcrumbs.push({ name: findMenu.name, path: findMenu.url })
-        // console.log('----------------')
-
-        return findMenu
+        breadcrumbs.push({ name: menu.name })
+        breadcrumbs.push({ name: findMenu.name })
+        return breadcrumbs
       }
     } else if (menu.type === 2 && menu.url === currentPath) {
       return menu
     }
   }
+  // console.log(breadcrumbs)
 
   return breadcrumbs
 }
@@ -31,6 +32,8 @@ export function pathMapBreadcrumbs(list: any[], currentPath: string) {
 // /main/system/role  -> type === 2 对应menu
 export function pathMapToMenu(list: any[], currentPath: string): any {
   for (const menu of list) {
+    console.log(menu.type)
+
     if (menu.type === 1) {
       const findMenu = pathMapToMenu(menu.children ?? [], currentPath)
       if (findMenu) {

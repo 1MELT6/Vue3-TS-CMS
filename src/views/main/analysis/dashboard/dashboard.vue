@@ -2,8 +2,8 @@
   <div class="dashboard">
     <el-row :gutter="10" class="updown">
       <el-col :span="6">
-        <hy-card title="用户总数"
-          ><div class="font">{{ usersAllCount }}</div>
+        <hy-card title="用户总数">
+          <div class="font">{{ usersAllCount }}</div>
         </hy-card>
       </el-col>
       <el-col :span="6">

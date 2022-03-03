@@ -10,14 +10,14 @@
         </template>
         <LoginAccout ref="accountRef" />
       </el-tab-pane>
-      <el-tab-pane name="phone">
+      <!-- <el-tab-pane name="phone">
         <template #label>
           <span>
             <i class="el-icon-mobile-phone">手机登陆</i>
           </span>
         </template>
         <LoginPhone ref="phoneRef" />
-      </el-tab-pane>
+      </el-tab-pane> -->
     </el-tabs>
     <div class="account-control">
       <el-checkbox v-model="isKeepPassword">记住密码</el-checkbox>
@@ -31,18 +31,18 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import LoginPhone from './login-phone.vue'
+// import LoginPhone from './login-phone.vue'
 import LoginAccout from './login-accout.vue'
 export default defineComponent({
   components: {
-    LoginPhone,
+    // LoginPhone,
     LoginAccout
   },
   setup() {
     // 1、定义属性
     const isKeepPassword = ref(true)
     const accountRef = ref<InstanceType<typeof LoginAccout>>() //默认为空然后返回再进行绑定logonaccount
-    const phoneRef = ref<InstanceType<typeof LoginPhone>>()
+    // const phoneRef = ref<InstanceType<typeof LoginPhone>>()
     const currentTab = ref<string>('account') //类似路由重定向，与model配合使用
     // 2、定义方法
     const handleLoginClick = () => {
@@ -57,8 +57,8 @@ export default defineComponent({
       handleLoginClick,
       isKeepPassword,
       accountRef,
-      currentTab,
-      phoneRef
+      currentTab
+      // phoneRef
     }
   }
 })
